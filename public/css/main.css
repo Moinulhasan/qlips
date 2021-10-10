@@ -1,0 +1,45 @@
+@import url(https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600&display=swap);
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.login-form-wrapper {
+  box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+}
+.login-form-wrapper .login-form-card .login-form-title h4 {
+  color: #202020;
+  font-size: 30px;
+  font-weight: 500;
+}
+.login-form-wrapper .login-form-card form input {
+  display: block;
+  margin-bottom: 2rem;
+  width: 100%;
+  background: #EDEDED;
+  border-radius: 100px;
+  border: none;
+  padding: 12px 2rem;
+  font-size: 14px;
+}
+.login-form-wrapper .login-form-card form input::-moz-placeholder {
+  color: #404040;
+}
+.login-form-wrapper .login-form-card form input:-ms-input-placeholder {
+  color: #404040;
+}
+.login-form-wrapper .login-form-card form input::placeholder {
+  color: #404040;
+}
+.login-form-wrapper .login-form-card form input:focus {
+  border: none;
+  outline: none;
+}
+.login-form-wrapper .login-form-card form .login-form-submit-button {
+  margin-top: 3rem;
+  background: #78A2CC;
+  color: #fff;
+}
