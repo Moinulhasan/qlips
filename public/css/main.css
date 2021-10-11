@@ -10,6 +10,9 @@
   background: url("/images/Login BG.svg?b89c4671d50833361d5ea47defc676f9");
   background-repeat: no-repeat;
   background-position: bottom;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
 }
 .login-page-container .login-form-wrapper {
   box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.1);
@@ -48,10 +51,6 @@
   margin-top: 3rem;
   background: #78A2CC;
   color: #fff;
-}
-
-.break-for-bg {
-  padding-bottom: 10rem;
 }
 
 .custom-nav {
