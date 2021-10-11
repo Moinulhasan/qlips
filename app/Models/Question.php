@@ -5,22 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CustomStatus extends Model
+class Question extends Model
 {
     use HasFactory;
-
-    protected $hidden=[
-      'created_at',
-      'updated_at'
-    ];
 
     public function topic()
     {
         return $this->hasMany(Topic::class);
     }
 
-    public function question()
+    public function status()
     {
-        return $this->hasMany(Question::class);
+        return $this->belongsTo(CustomStatus::class,'status_id');
     }
 }

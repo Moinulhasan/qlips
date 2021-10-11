@@ -14,4 +14,9 @@ class Topic extends Model
     {
         return $this->belongsTo(CustomStatus::class,'status_id');
     }
+
+    public function question()
+    {
+        return $this->hasMany(Question::class);
+    }
 }
