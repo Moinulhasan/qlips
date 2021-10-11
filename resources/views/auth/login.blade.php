@@ -2,10 +2,10 @@
 @section('section')
 <div class="login-page-container">
     <div class="container">
-        <div class="login-page-logo-wrapper text-center my-2">
+        <div class="login-page-logo-wrapper text-center my-3">
             <img src="{{ URL::asset('img/logo.png') }}" alt="logo" loading="lazy">
         </div>
-        <div class="row justify-content-center">
+        <div class="row justify-content-center align-items-center">
             <div class="col-md-5 col-lg-5">
                 <div class="login-form-wrapper text-center p-5 my-2">
                     <div class="login-form-card">
@@ -23,7 +23,6 @@
                 </div>
             </div>
         </div>
-        <div class="break-for-bg"></div>
     </div>
 </div>
 @endsection
