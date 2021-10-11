@@ -2,7 +2,7 @@
     <div class="sidenav-wrapper">
         <div class="toppart">
             <ul>
-                <li><a href=""> <img src="{{ URL::asset("img/dashboard.svg") }}" alt=""> Dashboard</a></li>
+                {{-- <li><a href=""> <img src="{{ URL::asset("img/dashboard.svg") }}" alt=""> Dashboard</a></li> --}}
                 <li><a href="{{ route("topics") }}"> <img src="{{ URL::asset("img/message.svg") }}" alt=""> Topics</a></li>
                 <li><a href=""> <img src="{{ URL::asset("img/qestions.svg") }}" alt=""> Questions</a></li>
                 <li><a href=""> <img src="{{ URL::asset("img/people.svg") }}" alt=""> Advisors</a></li>
