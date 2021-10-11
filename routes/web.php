@@ -18,3 +18,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/',[AuthenticationWebController::class,'login'])->name('login');
 
 Route::get("/topics",[ViewController::class,'topic'])->name("topics");
+Route::get("/questions",[ViewController::class,'questions'])->name("questions");

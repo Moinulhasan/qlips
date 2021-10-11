@@ -1,4 +1,68 @@
 @import url(https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600&display=swap);
+.trancate {
+  width: 245px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pagination-wrapper ul {
+  display: flex;
+  align-items: center;
+}
+.pagination-wrapper ul li {
+  list-style: none;
+}
+.pagination-wrapper ul li a {
+  color: #333;
+  font-weight: 500;
+  font-size: 14px;
+  margin: 0px 1rem;
+}
+.pagination-wrapper ul li:last-child {
+  margin: 0px;
+}
+.pagination-wrapper .pagination-arrow {
+  background: #78a2cc;
+  padding: 10px;
+  border-radius: 5px;
+}
+.pagination-wrapper .pagination-arrow-disabled {
+  background: #78a2cc;
+  opacity: 0.4;
+}
+
+.three-dot {
+  position: relative;
+}
+.three-dot .tool-tip-wrapper {
+  opacity: 0;
+  position: absolute;
+  width: 120px;
+  z-index: 99;
+  left: -30px;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.1);
+}
+.three-dot .tool-tip-wrapper img {
+  position: absolute;
+  top: -7px;
+  left: 74px;
+}
+.three-dot .tool-tip-wrapper .tooltip-item {
+  font-size: 12px;
+  font-weight: 500;
+  color: #828282;
+  text-align: left;
+  border-bottom: 1px solid #dfe0eb;
+  padding: 5px 4px;
+}
+.three-dot .tool-tip-wrapper .tooltip-item:last-child {
+  border-bottom: none;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -28,7 +92,7 @@
   display: block;
   margin-bottom: 2rem;
   width: 100%;
-  background: #EDEDED;
+  background: #ededed;
   border-radius: 100px;
   border: none;
   padding: 12px 2rem;
@@ -49,12 +113,12 @@
 }
 .login-page-container .login-form-wrapper .login-form-card form .login-form-submit-button {
   margin-top: 3rem;
-  background: #78A2CC;
+  background: #78a2cc;
   color: #fff;
 }
 
 .custom-nav {
-  background: #78A2CC;
+  background: #78a2cc;
 }
 .custom-nav .search-bar form {
   position: relative;
@@ -226,4 +290,30 @@ img.table-content-icon {
   font-size: 16px;
   font-weight: 600;
   color: #828282;
+}
+
+.sl-item {
+  font-size: 14px;
+  color: #828282;
+  font-weight: 500;
+}
+
+.selected-item {
+  background: rgba(223, 224, 235, 0.6);
+  border-radius: 3px;
+  padding: 3px 7px;
+  font-size: 14px;
+  color: #828282;
+}
+
+.close-btn {
+  height: 8px;
+  width: 8px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.status-hide {
+  background: rgba(255, 38, 38, 0.1);
+  color: rgba(255, 38, 38, 0.8);
 }

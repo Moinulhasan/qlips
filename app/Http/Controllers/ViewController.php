@@ -10,4 +10,8 @@ class ViewController extends Controller
     public function topic(){
         return View("pages.topics");
     }
+
+    public function questions(){
+        return View("pages.questions");
+    }
 }

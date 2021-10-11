@@ -11,16 +11,18 @@
 </head>
 <body>
     @include("components.header")
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-2 col-lg-2">
-                @include("components.sidenav")
-            </div>
-            <div class="col-md-10 col-lg-10 page-content pl-5 pt-4">
-                @yield('site-section')
+    <main>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-2 col-lg-2">
+                    @include("components.sidenav")
+                </div>
+                <div class="col-md-10 col-lg-10 page-content pl-5 pt-4">
+                    @yield('site-section')
+                </div>
             </div>
         </div>
-    </div>
+    </main>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
     <script src="{{ URL::asset("js/main.js") }}"></script>
