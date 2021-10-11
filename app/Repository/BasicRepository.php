@@ -42,8 +42,8 @@ class BasicRepository implements BasicRepositoryInterface
     public function getSingle($id)
     {
         // TODO: Implement getSingle() method.
-        $data= $this->model->find($id);
-        return $data;
+       return $this->model->find($id);
+
     }
 
 }
