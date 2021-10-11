@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\register\AuthenticationWebController;
+use App\Http\Controllers\topic\TopicController;
+use App\Http\Controllers\ViewController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,3 +16,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/',[AuthenticationWebController::class,'login'])->name('login');
+
+Route::get("/topics",[ViewController::class,'topic'])->name("topics");

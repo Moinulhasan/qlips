@@ -23,6 +23,7 @@
                 </div>
             </div>
         </div>
+        <div class="break-for-bg"></div>
     </div>
 </div>
 @endsection
