@@ -17,7 +17,10 @@
                             <input type="email" name="email" placeholder="admin" >
                             <input type="password" name="passowrd" placeholder="password" >
                            </div>
-                            <input type="button" name="submit" class="login-form-submit-button" value="Login" >
+                            <a href="{{asset(route('/topics'))}}">
+                                <input type="button" name="submit" class="login-form-submit-button" value="Login" >
+                            </a>
+
                         </form>
                     </div>
                 </div>
