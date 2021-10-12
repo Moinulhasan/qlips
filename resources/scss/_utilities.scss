@@ -1,1 +1,78 @@
-$box-shadow:3px 3px 20px rgba(0, 0, 0, 0.1);
+$box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.1);
+.trancate {
+    width: 245px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+// pagination
+
+.pagination-wrapper {
+    ul {
+        display: flex;
+        align-items: center;
+        li {
+            list-style: none;
+            a {
+                color: #333;
+                font-weight: 500;
+                font-size: 14px;
+                margin: 0px 1rem;
+            }
+            &:last-child {
+                margin: 0px;
+            }
+        }
+    }
+    .pagination-arrow {
+        background: #78a2cc;
+        padding: 10px;
+        border-radius: 5px;
+    }
+    .pagination-arrow-disabled {
+        background: #78a2cc;
+        opacity: 0.4;
+    }
+}
+
+// tool tip
+
+.three-dot {
+    position: relative;
+    &:hover {
+        .tool-tip-wrapper {
+            display: block;
+        }
+    }
+    .tool-tip-wrapper {
+        display: none;
+        position: absolute;
+        width: 120px;
+        z-index: 99;
+        left: -30px;
+        background: #ffffff;
+        border-radius: 8px;
+        padding: 10px;
+        box-shadow: $box-shadow;
+        img {
+            position: absolute;
+            top: -7px;
+            left: 74px;
+        }
+        .tooltip-item {
+            font-size: 12px;
+            font-weight: 500;
+            color: #828282;
+            text-align: left;
+            border-bottom: 1px solid #dfe0eb;
+            padding: 5px 4px;
+            &:last-child {
+                border-bottom: none;
+            }
+        }
+    }
+}
+
+.three-dot-image:hover {
+}

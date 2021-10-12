@@ -67,11 +67,21 @@
                         <div class="row align-items-center">
                             <div class="col-md-2"><img src="{{ URL::asset("img/design.svg") }}" alt="" class="table-content-icon"></div>
                             <div class="col-md-5"><p class="single-table-row-item-name">Design</p> </div>
-                            <div class="col-md-3"><div class="status-btn">Active</div></div>
+                            <div class="col-md-3"><div class="status-btn status-hide">Active</div></div>
                             <div class="col-md-2 text-center"><div class="three-dot"><img src="{{ URL::asset("img/dot.png") }}" alt=""></div></div>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="pagination-wrapper d-flex justify-content-end align-items-center my-4">
+                <ul class="">
+                    <li class="pagination-item"><a href="#"><img src="{{ URL::asset("img/leftArrow.png") }}" alt="image" class="pagination-arrow pagination-arrow-disabled"></a></li>
+                    <li class="pagination-item"><a class="" href="#">1</a></li>
+                    <li class="pagination-item"><a class="" href="#">2</a></li>
+                    <li class="pagination-item"><a class="" href="#">3</a></li>
+                    <li class="pagination-item"><a class="" href="#">4</a></li>
+                    <li class="pagination-item"><a href="#" class="m-0"><img src="{{ URL::asset("img/rightArrow.png") }}" alt="" class="pagination-arrow"></a></li>
+                </ul>
             </div>
         </div>
         <div class="col-md-4 col-lg-4">

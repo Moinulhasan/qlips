@@ -2,6 +2,7 @@
 @import "colors";
 @import "sizes";
 @import "utilities";
+@import "methods";
 
 * {
     margin: 0;
@@ -9,7 +10,9 @@
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
 }
-
+// main {
+//     background: #e5e5e5;
+// }
 // login form
 .login-page-container {
     background: url("../../public/img/Login\ BG.svg");
@@ -237,12 +240,40 @@ img.table-content-icon {
     .side-card-title {
         font-size: 16px;
         font-weight: 600;
-        color: #828282;
+        color: $text-primary;
     }
 }
 
 .side-card-body-title {
     font-size: 16px;
     font-weight: 600;
-    color: #828282;
+    color: $text-primary;
+}
+
+// question
+
+.sl-item {
+    font-size: 14px;
+    color: $text-primary;
+    font-weight: 500;
+}
+
+.selected-item {
+    background: rgba(223, 224, 235, 0.6);
+    border-radius: 3px;
+    padding: 3px 7px;
+    font-size: 14px;
+    color: $text-primary;
+}
+
+.close-btn {
+    height: 8px;
+    width: 8px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.status-hide {
+    background: rgba(255, 38, 38, 0.1);
+    color: rgba(255, 38, 38, 0.8);
 }
