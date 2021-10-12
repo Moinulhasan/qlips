@@ -238,14 +238,18 @@ img.table-content-icon {
         color: $light;
     }
     .side-card-title {
-        font-size: 16px;
+        font-size: 14px;
         font-weight: 600;
         color: $text-primary;
     }
 }
-
+.side-card-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: $text-primary;
+}
 .side-card-body-title {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 600;
     color: $text-primary;
 }
@@ -276,4 +280,65 @@ img.table-content-icon {
 .status-hide {
     background: rgba(255, 38, 38, 0.1);
     color: rgba(255, 38, 38, 0.8);
+}
+
+.topic-input-wrapper {
+    label {
+        font-size: 14px;
+        font-weight: 600;
+        color: #828282;
+    }
+}
+
+.advisor-image {
+    img {
+        height: 37px;
+        width: 37px;
+    }
+}
+
+.advisor-name {
+    p {
+        color: $text-primary;
+        font-size: 14px;
+    }
+}
+
+// audio clips page
+
+.add-button-wrapper {
+    a {
+        background: $q-primary;
+        border: none;
+        color: #fff;
+        font-weight: 500;
+        padding: 10px 1rem;
+        border-radius: 5px;
+        &:hover {
+            text-decoration: none;
+        }
+        img {
+            margin-right: 10px;
+        }
+    }
+}
+
+// upload audio
+
+.audio-upload-wrapper {
+    .audio-clip-submit-btn {
+        background: $q-primary;
+        color: $light;
+        width: 100%;
+        padding: 9px;
+        border: none;
+        border-radius: 5px;
+        font-size: 14px;
+        font-weight: 500;
+    }
+    input,
+    select {
+        font-size: 14px;
+        color: $text-primary;
+    }
 }

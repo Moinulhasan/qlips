@@ -9,11 +9,11 @@
                 <div class="page-content-table">
                     <div class="table-header border-bottom py-3 px-3">
                         <div class="row align-items-center">
-                            <div class="col-md-2 text-center">
-                                <p>ID</p>
+                            <div class="col-md-4">
+                                <p>Advisor</p>
                             </div>
-                            <div class="col-md-5 text-left">
-                                <p>Questions</p>
+                            <div class="col-md-3 text-left">
+                                <p>Profession</p>
                             </div>
                             <div class="col-md-3 text-center">
                                 <p>Status</p>
@@ -25,11 +25,16 @@
                     </div>
                     <div class="single-table-row border-bottom py-3 px-3">
                         <div class="row align-items-center">
-                            <div class="col-md-2 text-center sl-item">
-                                <P>01</P>
+                            <div class="col-md-4  advisor-wrapper">
+                                <div class="advisor-image d-flex align-items-center"><img
+                                        src="{{ URL::asset('img/user.png') }}" alt="image">
+                                    <div class="advisor-name ml-3">
+                                        <p>Sarah Drinkwater</p>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-5">
-                                <p class="single-table-row-item-name trancate">How have you built and managed an</p>
+                            <div class="col-md-3">
+                                <p class="single-table-row-item-name trancate">CTO @ Atomized</p>
                             </div>
                             <div class="col-md-3">
                                 <div class="status-btn m-auto">Active</div>
@@ -49,35 +54,16 @@
                     </div>
                     <div class="single-table-row border-bottom py-3 px-3">
                         <div class="row align-items-center">
-                            <div class="col-md-2 text-center sl-item">
-                                <P>02</P>
-                            </div>
-                            <div class="col-md-5">
-                                <p class="single-table-row-item-name trancate">How have you built and managed an</p>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="status-btn m-auto status-hide">Active</div>
-                            </div>
-                            <div class="col-md-2 text-center">
-                                <div class="three-dot"><img src="{{ URL::asset('img/dot.png') }}" alt="">
-                                    <div class="tool-tip-wrapper">
-                                        <div class="tooltip-content-wrapper">
-                                            <img src="{{ URL::asset('img/polygon.png') }}" alt="">
-                                            <div class="tooltip-item">Active</div>
-                                            <div class="tooltip-item">Hide</div>
-                                        </div>
+                            <div class="col-md-4  advisor-wrapper">
+                                <div class="advisor-image d-flex align-items-center"><img
+                                        src="{{ URL::asset('img/user.png') }}" alt="image">
+                                    <div class="advisor-name ml-3">
+                                        <p>Sarah Drinkwater</p>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="single-table-row border-bottom py-3 px-3">
-                        <div class="row align-items-center">
-                            <div class="col-md-2 text-center sl-item">
-                                <P>03</P>
-                            </div>
-                            <div class="col-md-5">
-                                <p class="single-table-row-item-name trancate">How have you built and managed an</p>
+                            <div class="col-md-3">
+                                <p class="single-table-row-item-name trancate">CTO @ Atomized</p>
                             </div>
                             <div class="col-md-3">
                                 <div class="status-btn m-auto">Active</div>
@@ -97,14 +83,19 @@
                     </div>
                     <div class="single-table-row border-bottom py-3 px-3">
                         <div class="row align-items-center">
-                            <div class="col-md-2 text-center sl-item">
-                                <P>03</P>
-                            </div>
-                            <div class="col-md-5">
-                                <p class="single-table-row-item-name trancate">How have you built and managed an</p>
+                            <div class="col-md-4  advisor-wrapper">
+                                <div class="advisor-image d-flex align-items-center"><img
+                                        src="{{ URL::asset('img/user.png') }}" alt="image">
+                                    <div class="advisor-name ml-3">
+                                        <p>Sarah Drinkwater</p>
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-md-3">
-                                <div class="status-btn m-auto status-hide">Active</div>
+                                <p class="single-table-row-item-name trancate">CTO @ Atomized</p>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="status-btn m-auto">Active</div>
                             </div>
                             <div class="col-md-2 text-center">
                                 <div class="three-dot"><img src="{{ URL::asset('img/dot.png') }}" alt="">
@@ -121,34 +112,22 @@
                     </div>
                     <div class="single-table-row border-bottom py-3 px-3">
                         <div class="row align-items-center">
-                            <div class="col-md-2 text-center sl-item">
-                                <P>03</P>
+                            <div class="col-md-4  advisor-wrapper">
+                                <div class="advisor-image d-flex align-items-center"><img
+                                        src="{{ URL::asset('img/user.png') }}" alt="image">
+                                    <div class="advisor-name ml-3">
+                                        <p>Sarah Drinkwater</p>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-5">
-                                <p class="single-table-row-item-name trancate">How have you built and managed an</p>
+                            <div class="col-md-3">
+                                <p class="single-table-row-item-name trancate">CTO @ Atomized</p>
                             </div>
                             <div class="col-md-3">
                                 <div class="status-btn m-auto">Active</div>
                             </div>
                             <div class="col-md-2 text-center">
-                                <div class="three-dot"><img src="{{ URL::asset('img/dot.png') }}" alt=""></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="single-table-row border-bottom py-3 px-3">
-                        <div class="row align-items-center">
-                            <div class="col-md-2 text-center sl-item">
-                                <P>03</P>
-                            </div>
-                            <div class="col-md-5">
-                                <p class="single-table-row-item-name trancate">How have you built and managed an</p>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="status-btn m-auto">Active</div>
-                            </div>
-                            <div class="col-md-2 text-center">
-                                <div class="three-dot"><img src="{{ URL::asset('img/dot.png') }}" alt=""
-                                        class="three-dot-image">
+                                <div class="three-dot"><img src="{{ URL::asset('img/dot.png') }}" alt="">
                                     <div class="tool-tip-wrapper">
                                         <div class="tooltip-content-wrapper">
                                             <img src="{{ URL::asset('img/polygon.png') }}" alt="">
@@ -162,17 +141,30 @@
                     </div>
                     <div class="single-table-row border-bottom py-3 px-3">
                         <div class="row align-items-center">
-                            <div class="col-md-2 text-center sl-item">
-                                <P>03</P>
+                            <div class="col-md-4  advisor-wrapper">
+                                <div class="advisor-image d-flex align-items-center"><img
+                                        src="{{ URL::asset('img/user.png') }}" alt="image">
+                                    <div class="advisor-name ml-3">
+                                        <p>Sarah Drinkwater</p>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-5">
-                                <p class="single-table-row-item-name trancate">How have you built and managed an</p>
+                            <div class="col-md-3">
+                                <p class="single-table-row-item-name trancate">CTO @ Atomized</p>
                             </div>
                             <div class="col-md-3">
                                 <div class="status-btn m-auto">Active</div>
                             </div>
                             <div class="col-md-2 text-center">
-                                <div class="three-dot"><img src="{{ URL::asset('img/dot.png') }}" alt=""></div>
+                                <div class="three-dot"><img src="{{ URL::asset('img/dot.png') }}" alt="">
+                                    <div class="tool-tip-wrapper">
+                                        <div class="tooltip-content-wrapper">
+                                            <img src="{{ URL::asset('img/polygon.png') }}" alt="">
+                                            <div class="tooltip-item">Active</div>
+                                            <div class="tooltip-item">Hide</div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -196,28 +188,25 @@
                 <div class="side-card">
                     <div class="side-card-header">
                         <div class="btn-wrapper d-flex justify-content-between align-items-center">
-                            <div class="side-card-title">Add Question</div>
+                            <div class="side-card-title">Add new topic</div>
                             <button class="card-add-btn">Add</button>
                         </div>
-                        <input type="text" class="form-control py-3 my-4" placeholder="Enter Questions">
+                        <input type="text" class="form-control py-3 my-4" placeholder="Enter topic name">
+                    </div>
+                    <div class="topic-input-wrapper">
+                        <label for="">Add Profession</label>
+                        <input type="text" class="form-control py-3 mb-4" placeholder="Enter Profession">
                     </div>
                 </div>
                 <div class="side-card-body">
                     <div class="side-card-body-title">
-                        <p class="">Topics</p>
+                        <p class="">Upload Profile Image</p>
                     </div>
-                    <select name="topic" id="" class="form-control">
-                        <option value="" selected>Design</option>
-                        <option value="">Design</option>
-                        <option value="">Invest</option>
-                    </select>
-                    <div class="selected-item-wrapper d-flex align-items-center py-4">
-                        <div class="selected-item mr-2">Design <img src="{{ URL::asset('img/Vector.png') }}" alt="close"
-                                class="close-btn"></div>
-                        <div class="selected-item mr-2">Invest <img src="{{ URL::asset('img/Vector.png') }}" alt="close"
-                                class="close-btn"></div>
-                        <div class="selected-item mr-2">Leader <img src="{{ URL::asset('img/Vector.png') }}" alt="close"
-                                class="close-btn"></div>
+                    <div class="drag-area" id="dragWrapper">
+                        <img src="{{ URL::asset('img/image.png') }}" alt="image" class="img-fluid drug-drop-icon">
+                        <p>Drag and Drop Here (100 X 100px) <br />or</p>
+                        <button class="custom-file-upload-btn" id="browsButton">Browse Files</button>
+                        <input type="file" name="image" id="browsInput" hidden accept="image/*" />
                     </div>
                 </div>
             </div>
