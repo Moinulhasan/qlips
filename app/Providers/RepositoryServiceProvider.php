@@ -5,12 +5,15 @@ namespace App\Providers;
 use App\Models\CustomStatus;
 use App\Models\Question;
 use App\Models\Topic;
+use App\Models\User;
 use App\Repository\question\QuestionRepository;
 use App\Repository\question\QuestionRepositoryInterface;
 use App\Repository\status\StatusRepository;
 use App\Repository\status\StatusRepositoryInterface;
 use App\Repository\topic\TopicRepository;
 use App\Repository\topic\TopicRepositoryInterface;
+use App\Repository\user\UserRepository;
+use App\Repository\user\UserRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -39,6 +42,11 @@ class RepositoryServiceProvider extends ServiceProvider
             return new QuestionRepository(new Question(),
             resolve(StatusRepositoryInterface::class)
             );
+        });
+
+        // user register
+        $this->app->singleton(UserRepositoryInterface::class,function ($app){
+            return new UserRepository(new User());
         });
     }
 

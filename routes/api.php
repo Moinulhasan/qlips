@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\customAuth\CustomAuthController;
 use App\Http\Controllers\status\StatusController;
 use App\Http\Controllers\topic\TopicController;
 use Illuminate\Database\Console\Migrations\StatusCommand;
@@ -30,3 +31,5 @@ Route::prefix('topic')->group(function ($app){
     Route::post('/create',[TopicController::class,'create']);
     Route::get('/get-all',[TopicController::class,'getAll']);
 });
+
+Route::post('/authenticate',[CustomAuthController::class,'Authorization']);
