@@ -35,8 +35,11 @@
 .three-dot {
   position: relative;
 }
+.three-dot:hover .tool-tip-wrapper {
+  display: block;
+}
 .three-dot .tool-tip-wrapper {
-  opacity: 0;
+  display: none;
   position: absolute;
   width: 120px;
   z-index: 99;
@@ -281,13 +284,19 @@ img.table-content-icon {
   color: #fff;
 }
 .side-card-header .side-card-title {
-  font-size: 16px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #828282;
+}
+
+.side-card-title {
+  font-size: 14px;
   font-weight: 600;
   color: #828282;
 }
 
 .side-card-body-title {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
   color: #828282;
 }
@@ -316,4 +325,51 @@ img.table-content-icon {
 .status-hide {
   background: rgba(255, 38, 38, 0.1);
   color: rgba(255, 38, 38, 0.8);
+}
+
+.topic-input-wrapper label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #828282;
+}
+
+.advisor-image img {
+  height: 37px;
+  width: 37px;
+}
+
+.advisor-name p {
+  color: #828282;
+  font-size: 14px;
+}
+
+.add-button-wrapper a {
+  background: #78a2cc;
+  border: none;
+  color: #fff;
+  font-weight: 500;
+  padding: 10px 1rem;
+  border-radius: 5px;
+}
+.add-button-wrapper a:hover {
+  text-decoration: none;
+}
+.add-button-wrapper a img {
+  margin-right: 10px;
+}
+
+.audio-upload-wrapper .audio-clip-submit-btn {
+  background: #78a2cc;
+  color: #fff;
+  width: 100%;
+  padding: 9px;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.audio-upload-wrapper input,
+.audio-upload-wrapper select {
+  font-size: 14px;
+  color: #828282;
 }

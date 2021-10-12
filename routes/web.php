@@ -19,3 +19,6 @@ Route::get('/',[AuthenticationWebController::class,'login'])->name('login');
 
 Route::get("/topics",[ViewController::class,'topic'])->name("topics");
 Route::get("/questions",[ViewController::class,'questions'])->name("questions");
+Route::get("/advisor",[ViewController::class,'advisor'])->name("advisor");
+Route::get("/audio-clips",[ViewController::class,'audioClips'])->name("audioClips");
+Route::get("/audio-upload",[ViewController::class,'uploadAudio'])->name("uploadAudio");
