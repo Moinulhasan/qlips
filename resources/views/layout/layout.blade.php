@@ -6,7 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href={{ URL::asset('css/main.css') }}>
-    <title>Laravel</title>
+    <title>qlips</title>
+    <link rel="shortcut icon" href="{{asset('/img/logo.png')}}"/>
     @stack('styles')
 </head>
 <body>
@@ -14,5 +15,15 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
     @stack("script")
+    <script>
+        let error = document.getElementById('error');
+        if (error)
+        {
+            setTimeout(function(){
+                error.style.display = 'none'
+            }, 3000);
+
+        }
+    </script>
 </body>
 </html>

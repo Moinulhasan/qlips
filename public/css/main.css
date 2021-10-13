@@ -114,6 +114,13 @@
   border: none;
   outline: none;
 }
+.login-page-container .login-form-wrapper .login-form-card form button {
+  margin-bottom: 2rem;
+  width: 100%;
+  padding: 12px 2rem;
+  font-size: 14px;
+  border-radius: 100px;
+}
 .login-page-container .login-form-wrapper .login-form-card form .login-form-submit-button {
   margin-top: 3rem;
   background: #78a2cc;
