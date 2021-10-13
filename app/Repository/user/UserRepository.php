@@ -61,4 +61,25 @@ class UserRepository extends \App\Repository\BasicRepository implements UserRepo
     {
         return $user->createToken('API Token')->plainTextToken;
     }
+
+    public function superAdminRegister($data)
+    {
+        DB::beginTransaction();
+        try {
+            $user =new $this->model;
+            $user->name = $data['name'];
+            $user->email = $data['email'];
+            $user->password = Hash::make($data['password']);
+            $user->avatar = $data['image']->store('/image/admin','public');
+            $user->phone = $data['phone'];
+            $user->role_id = 1;
+            $user->save();
+            DB::commit();
+            return $user;
+        }catch (\Exception $exception)
+        {
+            DB::rollBack();
+            return false;
+        }
+    }
 }

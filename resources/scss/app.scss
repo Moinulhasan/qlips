@@ -51,6 +51,13 @@
                         outline: none;
                     }
                 }
+                button{
+                    margin-bottom: 2rem;
+                    width: 100%;
+                    padding: 12px 2rem;
+                    font-size: 14px;
+                    border-radius: 100px;
+                }
                 .login-form-submit-button {
                     margin-top: 3rem;
                     background: $q-primary;

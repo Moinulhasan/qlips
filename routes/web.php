@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\customAuth\CustomAuthController;
 use App\Http\Controllers\register\AuthenticationWebController;
 use App\Http\Controllers\topic\TopicController;
 use App\Http\Controllers\ViewController;
@@ -16,9 +17,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/',[AuthenticationWebController::class,'login'])->name('login');
+Route::post('/login',[CustomAuthController::class,'login'])->name('login.post');
+Route::group(['middleware'=>['auth','superAdmin']],function (){
+    Route::get("/topics",[ViewController::class,'topic'])->name("topics");
+    Route::get("/questions",[ViewController::class,'questions'])->name("questions");
+    Route::get("/advisor",[ViewController::class,'advisor'])->name("advisor");
+    Route::get("/audio-clips",[ViewController::class,'audioClips'])->name("audioClips");
+    Route::get("/audio-upload",[ViewController::class,'uploadAudio'])->name("uploadAudio");
+});
 
-Route::get("/topics",[ViewController::class,'topic'])->name("topics");
-Route::get("/questions",[ViewController::class,'questions'])->name("questions");
-Route::get("/advisor",[ViewController::class,'advisor'])->name("advisor");
-Route::get("/audio-clips",[ViewController::class,'audioClips'])->name("audioClips");
-Route::get("/audio-upload",[ViewController::class,'uploadAudio'])->name("uploadAudio");
