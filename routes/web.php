@@ -19,7 +19,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/',[AuthenticationWebController::class,'login'])->name('login');
 Route::post('/login',[CustomAuthController::class,'login'])->name('login.post');
 Route::group(['middleware'=>['auth','superAdmin']],function (){
-    Route::get("/topics",[ViewController::class,'topic'])->name("topics");
+    Route::prefix('topics')->group(function(){
+        Route::get("/",[TopicController::class,'index'])->name("topics");
+        Route::post('/create',[TopicController::class,'createTopic'])->name('topics.create');
+        Route::post('/update-status',[TopicController::class,'topicStatusChange'])->name('topic.status.update');
+    });
+
     Route::get("/questions",[ViewController::class,'questions'])->name("questions");
     Route::get("/advisor",[ViewController::class,'advisor'])->name("advisor");
     Route::get("/audio-clips",[ViewController::class,'audioClips'])->name("audioClips");

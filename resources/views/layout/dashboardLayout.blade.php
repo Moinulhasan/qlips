@@ -27,6 +27,23 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
     <script src="{{ URL::asset("js/main.js") }}"></script>
+    <script>
+        // <script>
+        let err = document.querySelectorAll("[id='error']");
+        if (err) {
+            setTimeout(function () {
+                for (var i = 0; i < err.length; i++)
+                    err[i].style.display = 'none'
+            }, 3000);
+        }
+
+        let success = document.getElementById('success')
+        if (success) {
+            setTimeout(function () {
+                success.style.display = 'none'
+            }, 3000);
+        }
+    </script>
     @stack("script")
 </body>
 </html>
