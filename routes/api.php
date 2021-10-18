@@ -25,6 +25,7 @@ use Illuminate\Support\Facades\Route;
 // status
 Route::post('/create-status',[StatusController::class,'create']);
 Route::get('/get-all-status',[StatusController::class,'getAllStatus']);
+//register api
 Route::post('/super-admin-register',[CustomAuthController::class,'superAdminRegister']);
 /// topic
 Route::prefix('topic')->group(function ($app){
