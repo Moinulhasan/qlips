@@ -67,6 +67,12 @@ $box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.1);
             text-align: left;
             border-bottom: 1px solid #dfe0eb;
             padding: 5px 4px;
+            cursor: pointer;
+            input{
+                background: none;
+                border: none;
+                color: #828282;
+            }
             &:last-child {
                 border-bottom: none;
             }

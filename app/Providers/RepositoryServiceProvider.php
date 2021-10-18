@@ -2,10 +2,13 @@
 
 namespace App\Providers;
 
+use App\Models\Advisor;
 use App\Models\CustomStatus;
 use App\Models\Question;
 use App\Models\Topic;
 use App\Models\User;
+use App\Repository\advisor\AdvisorRepository;
+use App\Repository\advisor\AdvisorRepositoryInterface;
 use App\Repository\question\QuestionRepository;
 use App\Repository\question\QuestionRepositoryInterface;
 use App\Repository\status\StatusRepository;
@@ -47,6 +50,12 @@ class RepositoryServiceProvider extends ServiceProvider
         // user register
         $this->app->singleton(UserRepositoryInterface::class,function ($app){
             return new UserRepository(new User());
+        });
+
+        // advisor register
+        $this->app->singleton(AdvisorRepositoryInterface::class,function ($app){
+            return new AdvisorRepository(new Advisor(),
+            resolve(StatusRepositoryInterface::class));
         });
     }
 

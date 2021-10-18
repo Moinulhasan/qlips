@@ -3,6 +3,7 @@
 
 namespace App\Repository;
 
+use App\Models\CustomStatus;
 use Illuminate\Database\Eloquent\Model;
 class BasicRepository implements BasicRepositoryInterface
 {
@@ -17,6 +18,19 @@ class BasicRepository implements BasicRepositoryInterface
     {
         // TODO: Implement getAll() method.
         $data = $this->model->orderBy($orderByColumn, $order);
+        if ($paginate){
+            $data = $data->paginate($numberOfResults);
+        } else {
+            $data = $data->get();
+        }
+        return $data;
+    }
+    public function getAllStatus($paginate=false, $numberOfResults = 20, $orderByColumn = 'created_at', $order='desc')
+    {
+        // TODO: Implement getAll() method.
+        $data = $this->model->with('status')->whereHas('status',function ($app){
+            $app->where('name','=','active');
+        })->orderBy($orderByColumn, $order);
         if ($paginate){
             $data = $data->paginate($numberOfResults);
         } else {

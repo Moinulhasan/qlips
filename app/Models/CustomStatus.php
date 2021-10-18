@@ -23,4 +23,9 @@ class CustomStatus extends Model
     {
         return $this->hasMany(Question::class);
     }
+
+    public function advisor()
+    {
+        return $this->hasMany(Advisor::class);
+    }
 }

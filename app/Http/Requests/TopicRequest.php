@@ -23,10 +23,11 @@ class TopicRequest extends FormRequest
      */
     public function rules()
     {
+//        dd($this);
         return [
             'name'=>'required|string',
             'thumbnail'=>'required|mimes:jpeg,jpg,png,gif|max:5000',
-            'status'=>'required|string'
+//            'status'=>'required|string'
         ];
     }
 
@@ -38,7 +39,7 @@ class TopicRequest extends FormRequest
             'thumbnail.required'=>'Topic thumbnail is required',
             'thumbnail.mimes'=>'Topic thumbnail is not correct',
             'thumbnail.max'=>'Maximum 5mb thumbnail is allowed',
-            'status.required'=>'status field is required'
+//            'status.required'=>'status field is required'
         ];
     }
 }
