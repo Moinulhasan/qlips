@@ -27,22 +27,33 @@ class QuestionRepository extends \App\Repository\BasicRepository implements Ques
         DB::beginTransaction();
         try {
             $question = new $this->model;
-            $question->name = $data['name'];
-            $status = $this->status->getSingle($data['status']);
+            $question->question = $data['name'];
+            $status = $this->status->getSingleWith('Active');
             $question->status()->associate($status);
             $question->save();
 
-            if (isset($data['topic'])){
-                foreach ($data['topic'] as $topic)
-                {
-                    $question->topic()->sync($topic);
-                }
+            if (isset($data['topic'])) {
+
+                $question->topic()->sync($data['topic']);
             }
             DB::commit();
             return true;
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            return false;
+        }
+    }
+
+    public function updateStatus($data,$id)
+    {
+        try {
+            $advisor = $this->model->find($id);
+            $status = $this->status->getSingleWith($data);
+            $advisor->status()->associate($status);
+            $advisor->save();
+            return true;
         }catch (\Exception $exception)
         {
-            DB::rollBack();
             return false;
         }
     }

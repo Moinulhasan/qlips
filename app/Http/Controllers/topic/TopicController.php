@@ -71,7 +71,6 @@ class TopicController extends Controller
     {
         $id = $request->id;
         $status = $request->status;
-//        dd($status);
         try {
             $output = $this->topic->updateStatus($id, $status);
             if ($output == true) {

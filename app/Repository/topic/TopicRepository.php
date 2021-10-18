@@ -56,7 +56,6 @@ class TopicRepository extends \App\Repository\BasicRepository implements TopicRe
         try {
             $topic = $this->model->find($id);
             $status = CustomStatus::where('name','=',$status)->first();
-//            dd($status);
             $topic->status()->associate($status);
             $topic->save();
             return true;

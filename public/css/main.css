@@ -351,6 +351,7 @@ img.table-content-icon {
 .advisor-image img {
   height: 37px;
   width: 37px;
+  border-radius: 50%;
 }
 
 .advisor-name p {
