@@ -112,19 +112,23 @@
 
                 </div>
             </div>
-            <div class="pagination-wrapper d-flex justify-content-end align-items-center my-4">
-                <ul class="">
-                    <li class="pagination-item"><a href="#"><img src="{{ URL::asset('img/leftArrow.png') }}" alt="image"
-                                                                 class="pagination-arrow pagination-arrow-disabled"></a>
-                    </li>
-                    <li class="pagination-item"><a class="" href="#">1</a></li>
-                    <li class="pagination-item"><a class="" href="#">2</a></li>
-                    <li class="pagination-item"><a class="" href="#">3</a></li>
-                    <li class="pagination-item"><a class="" href="#">4</a></li>
-                    <li class="pagination-item"><a href="#" class="m-0"><img
-                                src="{{ URL::asset('img/rightArrow.png') }}" alt="" class="pagination-arrow"></a></li>
-                </ul>
+            <div class="d-flex justify-content-between ">
+                <div></div>
+                {{$data->links()}}
             </div>
+{{--            <div class="pagination-wrapper d-flex justify-content-end align-items-center my-4">--}}
+{{--                <ul class="">--}}
+{{--                    <li class="pagination-item"><a href="#"><img src="{{ URL::asset('img/leftArrow.png') }}" alt="image"--}}
+{{--                                                                 class="pagination-arrow pagination-arrow-disabled"></a>--}}
+{{--                    </li>--}}
+{{--                    <li class="pagination-item"><a class="" href="#">1</a></li>--}}
+{{--                    <li class="pagination-item"><a class="" href="#">2</a></li>--}}
+{{--                    <li class="pagination-item"><a class="" href="#">3</a></li>--}}
+{{--                    <li class="pagination-item"><a class="" href="#">4</a></li>--}}
+{{--                    <li class="pagination-item"><a href="#" class="m-0"><img--}}
+{{--                                src="{{ URL::asset('img/rightArrow.png') }}" alt="" class="pagination-arrow"></a></li>--}}
+{{--                </ul>--}}
+{{--            </div>--}}
         </div>
     </div>
 
