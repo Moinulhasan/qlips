@@ -4,6 +4,7 @@ namespace App\Http\Controllers\question;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\question\QuestionRequest;
+use App\Repository\advisor\AdvisorRepositoryInterface;
 use App\Repository\question\QuestionRepositoryInterface;
 use App\Repository\topic\TopicRepositoryInterface;
 use Illuminate\Http\Request;
@@ -20,14 +21,20 @@ class QuestionController extends Controller
      * @var TopicRepositoryInterface
      */
     private $topic;
+    /**
+     * @var AdvisorRepositoryInterface
+     */
+    private $avdisor;
 
     public function __construct(
         QuestionRepositoryInterface $questionRepository,
-        TopicRepositoryInterface $topicRepository
+        TopicRepositoryInterface $topicRepository,
+        AdvisorRepositoryInterface $advisorRepository
     )
     {
         $this->question = $questionRepository;
         $this->topic = $topicRepository;
+
     }
 
     public function index()

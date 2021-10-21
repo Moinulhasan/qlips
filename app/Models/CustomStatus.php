@@ -28,4 +28,9 @@ class CustomStatus extends Model
     {
         return $this->hasMany(Advisor::class);
     }
+
+    public function clips()
+    {
+        return $this->hasMany(Qlips::class);
+    }
 }
