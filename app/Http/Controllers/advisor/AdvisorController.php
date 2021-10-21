@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\advisor;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\advisor\AdvisorRequest;
 use App\Repository\advisor\AdvisorRepositoryInterface;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,7 @@ class AdvisorController extends Controller
         return view('pages.advisor',['data'=>$data]);
     }
 
-    public function store(Request $request)
+    public function store(AdvisorRequest $request)
     {
         try {
             $output = $this->advisor->store($request->all());

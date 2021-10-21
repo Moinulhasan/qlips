@@ -115,7 +115,7 @@
                             </div>
                             <input type="text" class="form-control py-3 my-4" placeholder="Enter Questions" name="name">
                             @if($errors->has('name'))
-                                <div class="error" id="error"><p>{{ $errors->first('name') }}</p></div>
+                                <div class="error text-danger" id="error"><p>{{ $errors->first('name') }}</p></div>
                             @endif
                         </div>
                     </div>
@@ -132,7 +132,7 @@
                             @endif
                         </select>
                         @if($errors->has('topic'))
-                            <div class="error" id="error"><p>{{ $errors->first('topic') }}</p></div>
+                            <div class="error text-danger" id="error"><p>{{ $errors->first('topic') }}</p></div>
                         @endif
                         {{--                    <div class="selected-item-wrapper d-flex align-items-center py-4">--}}
                         {{--                        <div class="selected-item mr-2">Design <img src="{{ URL::asset('img/Vector.png') }}" alt="close"--}}

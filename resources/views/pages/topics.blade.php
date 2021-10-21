@@ -94,7 +94,7 @@
                             <input type="text" class="form-control py-3 my-4" name="name"
                                    placeholder="Enter topic name">
                             @if($errors->has('name'))
-                                <div class="error" id="error"><p>{{ $errors->first('name') }}</p></div>
+                                <div class="error text-danger" id="error"><p>{{ $errors->first('name') }}</p></div>
                             @endif
 
                         </div>
@@ -112,7 +112,7 @@
                             <input type="file" name="thumbnail" id="browsInput" hidden accept="image/*"/>
                         </div>
                         @if($errors->has('thumbnail'))
-                            <div class="error" id="error"><p>{{ $errors->first('name') }}</p></div>
+                            <div class="error text-danger" id="error"><p>{{ $errors->first('thumbnail') }}</p></div>
                         @endif
 
                     </div>

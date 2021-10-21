@@ -41,10 +41,9 @@ class TopicController extends Controller
         }
     }
 
-    public function createTopic(Request $request)
+    public function createTopic(TopicRequest $request)
 
     {
-//        dd($request->all());
         try {
             $output = $this->topic->createCustomTopic($request);
             if ($output == true) {
