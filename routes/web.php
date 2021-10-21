@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\advisor\AdvisorController;
+use App\Http\Controllers\clips\ClipsController;
 use App\Http\Controllers\customAuth\CustomAuthController;
 use App\Http\Controllers\question\QuestionController;
 use App\Http\Controllers\register\AuthenticationWebController;
@@ -38,8 +39,13 @@ Route::group(['middleware'=>['auth','superAdmin']],function (){
         Route::post('/update-status',[AdvisorController::class,'advisorUpdate'])->name('advisor.status.update');
     });
 
+    Route::prefix('audio')->group(function (){
+        Route::get("/",[ClipsController::class,'index'])->name("audio.index");
+        Route::get("/audio-upload",[ClipsController::class,'uploadAudio'])->name("audio.uploadAudio");
+        Route::post('/upload',[ClipsController::class,'store'])->name("audio.upload");
+        Route::post('/update-status',[ClipsController::class,'audioUpdate'])->name('audio.status.update');
+    });
 
-    Route::get("/audio-clips",[ViewController::class,'audioClips'])->name("audioClips");
-    Route::get("/audio-upload",[ViewController::class,'uploadAudio'])->name("uploadAudio");
+
 });
 

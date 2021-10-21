@@ -9,7 +9,7 @@
                         Questions</a></li>
                 <li><a href="{{ route('advisor') }}"> <img src="{{ URL::asset('img/people.svg') }}" alt="">
                         Advisors</a></li>
-                <li><a href="{{ route('audioClips') }}"> <img src="{{ URL::asset('img/qlips.svg') }}" alt=""> Audio
+                <li><a href="{{ route('audio.index') }}"> <img src="{{ URL::asset('img/qlips.svg') }}" alt=""> Audio
                         Qlips</a></li>
             </ul>
         </div>

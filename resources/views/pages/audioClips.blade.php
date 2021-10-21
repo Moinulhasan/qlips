@@ -1,11 +1,22 @@
 @extends("layout.dashboardLayout")
 @section('site-section')
+    @if (\Session::has('success'))
+        <div class="card mb-3" id="success">
+            <div class="card-body">
+                <div class="d-flex justify-content-center">
+                    <h5 class="text-success"> {!! \Session::get('success') !!}</h5>
+                </div>
+            </div>
+        </div>
+    @endif
     <div class="page-title-wrapper d-flex justify-content-between">
         <div class="page-title">
             <h2>All Questions</h2>
+
         </div>
         <div class="add-button-wrapper">
-            <a href="{{ route('uploadAudio') }}"><img src="{{ URL::asset('img/plus.png') }}" alt="img" />Add New
+            <a href="{{ asset(route('audio.uploadAudio')) }}"><img src="{{ URL::asset('img/plus.png') }}" alt="img"/>Add
+                New
                 Qlips</a>
         </div>
     </div>
@@ -35,336 +46,77 @@
                             </div>
                         </div>
                     </div>
-                    <div class="single-table-row border-bottom py-3 px-3">
-                        <div class="row align-items-center">
-                            <div class="col-md-1 text-center sl-item">
-                                <P>01</P>
-                            </div>
-                            <div class="col-md-2">
-                                <p class="single-table-row-item-name trancate">Audio.mp3</p>
-                            </div>
-                            <div class="col-md-3">
-                                <p class="single-table-row-item-name trancate">How have you built and managed an</p>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="advisor-image d-flex align-items-center"><img
-                                        src="{{ URL::asset('img/user.png') }}" alt="image">
-                                    <div class="advisor-name ml-2">
-                                        <p>Sarah Drinkwater</p>
+                    @if(isset($data))
+                        @foreach($data as $key=>$item)
+                            <div class="single-table-row border-bottom py-3 px-3">
+                                <div class="row align-items-center">
+                                    <div class="col-md-1 text-center sl-item">
+                                        <P>{{ ($data->currentpage()-1) * $data->perpage() + $key + 1 }}</P>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-md-1">
-                                <div class="status-btn m-auto status-hide">Active</div>
-                            </div>
-                            <div class="col-md-2 text-center">
-                                <div class="three-dot"><img src="{{ URL::asset('img/dot.png') }}" alt="">
-                                    <div class="tool-tip-wrapper">
-                                        <div class="tooltip-content-wrapper">
-                                            <img src="{{ URL::asset('img/polygon.png') }}" alt="">
-                                            <div class="tooltip-item">Active</div>
-                                            <div class="tooltip-item">Hide</div>
-                                            <div class="tooltip-item">Recent</div>
+                                    <div class="col-md-2">
+{{--                                        <p class="single-table-row-item-name trancate">--}}
+                                            <audio controls src="{{asset('storage/'.$item->content)}}" class="w-100"></audio>
+{{--                                        </p>--}}
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p class="single-table-row-item-name trancate">
+                                            {{\Illuminate\Support\Str::limit($item->question->question,'30','...')}}
+                                        </p>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="advisor-image d-flex align-items-center"><img
+                                                src="{{ asset('storage/'.$item->advisor->image)}}" alt="image">
+                                            <div class="advisor-name ml-2">
+                                                <p>{{$item->advisor->name}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <div class="status-btn m-auto {{$item->status->name == 'Active'?'status-btn':'status-hide'}}">{{$item->status->name}}</div>
+                                    </div>
+                                    <div class="col-md-2 text-center">
+                                        <div class="three-dot"><img src="{{ URL::asset('img/dot.png') }}" alt="">
+                                            <div class="tool-tip-wrapper">
+                                                <div class="tooltip-content-wrapper">
+                                                    <img src="{{ URL::asset('img/polygon.png') }}" alt="">
+                                                    <div class="tooltip-item">
+                                                        <form action="{{asset(route('audio.status.update',['id'=>$item->id,'status'=>'Active']))}}" method="post">
+                                                            @csrf
+                                                            @method('post')
+                                                            <input type="submit" value="Active" class="w-100">
+                                                        </form>
+                                                    </div>
+                                                    <div class="tooltip-item">
+                                                        <form action="{{asset(route('audio.status.update',['id'=>$item->id,'status'=>'Hide']))}}" method="post">
+                                                            @csrf
+                                                            @method('post')
+                                                            <input type="submit" value="Hide" class="w-100">
+                                                        </form>
+                                                    </div>
+                                                    <div class="tooltip-item">
+                                                        <form action="{{asset(route('audio.status.update',['id'=>$item->id,'status'=>'Recent']))}}" method="post">
+                                                            @csrf
+                                                            @method('post')
+                                                            <input type="submit" value="Recent" class="w-100">
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="single-table-row border-bottom py-3 px-3">
-                        <div class="row align-items-center">
-                            <div class="col-md-1 text-center sl-item">
-                                <P>01</P>
-                            </div>
-                            <div class="col-md-2">
-                                <p class="single-table-row-item-name trancate">Audio.mp3</p>
-                            </div>
-                            <div class="col-md-3">
-                                <p class="single-table-row-item-name trancate">How have you built and managed an</p>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="advisor-image d-flex align-items-center"><img
-                                        src="{{ URL::asset('img/user.png') }}" alt="image">
-                                    <div class="advisor-name ml-2">
-                                        <p>Sarah Drinkwater</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-1">
-                                <div class="status-btn m-auto status-hide">Active</div>
-                            </div>
-                            <div class="col-md-2 text-center">
-                                <div class="three-dot"><img src="{{ URL::asset('img/dot.png') }}" alt="">
-                                    <div class="tool-tip-wrapper">
-                                        <div class="tooltip-content-wrapper">
-                                            <img src="{{ URL::asset('img/polygon.png') }}" alt="">
-                                            <div class="tooltip-item">Active</div>
-                                            <div class="tooltip-item">Hide</div>
-                                            <div class="tooltip-item">Recent</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="single-table-row border-bottom py-3 px-3">
-                        <div class="row align-items-center">
-                            <div class="col-md-1 text-center sl-item">
-                                <P>01</P>
-                            </div>
-                            <div class="col-md-2">
-                                <p class="single-table-row-item-name trancate">Audio.mp3</p>
-                            </div>
-                            <div class="col-md-3">
-                                <p class="single-table-row-item-name trancate">How have you built and managed an</p>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="advisor-image d-flex align-items-center"><img
-                                        src="{{ URL::asset('img/user.png') }}" alt="image">
-                                    <div class="advisor-name ml-2">
-                                        <p>Sarah Drinkwater</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-1">
-                                <div class="status-btn m-auto status-hide">Active</div>
-                            </div>
-                            <div class="col-md-2 text-center">
-                                <div class="three-dot"><img src="{{ URL::asset('img/dot.png') }}" alt="">
-                                    <div class="tool-tip-wrapper">
-                                        <div class="tooltip-content-wrapper">
-                                            <img src="{{ URL::asset('img/polygon.png') }}" alt="">
-                                            <div class="tooltip-item">Active</div>
-                                            <div class="tooltip-item">Hide</div>
-                                            <div class="tooltip-item">Recent</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="single-table-row border-bottom py-3 px-3">
-                        <div class="row align-items-center">
-                            <div class="col-md-1 text-center sl-item">
-                                <P>01</P>
-                            </div>
-                            <div class="col-md-2">
-                                <p class="single-table-row-item-name trancate">Audio.mp3</p>
-                            </div>
-                            <div class="col-md-3">
-                                <p class="single-table-row-item-name trancate">How have you built and managed an</p>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="advisor-image d-flex align-items-center"><img
-                                        src="{{ URL::asset('img/user.png') }}" alt="image">
-                                    <div class="advisor-name ml-2">
-                                        <p>Sarah Drinkwater</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-1">
-                                <div class="status-btn m-auto status-hide">Active</div>
-                            </div>
-                            <div class="col-md-2 text-center">
-                                <div class="three-dot"><img src="{{ URL::asset('img/dot.png') }}" alt="">
-                                    <div class="tool-tip-wrapper">
-                                        <div class="tooltip-content-wrapper">
-                                            <img src="{{ URL::asset('img/polygon.png') }}" alt="">
-                                            <div class="tooltip-item">Active</div>
-                                            <div class="tooltip-item">Hide</div>
-                                            <div class="tooltip-item">Recent</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="single-table-row border-bottom py-3 px-3">
-                        <div class="row align-items-center">
-                            <div class="col-md-1 text-center sl-item">
-                                <P>01</P>
-                            </div>
-                            <div class="col-md-2">
-                                <p class="single-table-row-item-name trancate">Audio.mp3</p>
-                            </div>
-                            <div class="col-md-3">
-                                <p class="single-table-row-item-name trancate">How have you built and managed an</p>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="advisor-image d-flex align-items-center"><img
-                                        src="{{ URL::asset('img/user.png') }}" alt="image">
-                                    <div class="advisor-name ml-2">
-                                        <p>Sarah Drinkwater</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-1">
-                                <div class="status-btn m-auto status-hide">Active</div>
-                            </div>
-                            <div class="col-md-2 text-center">
-                                <div class="three-dot"><img src="{{ URL::asset('img/dot.png') }}" alt="">
-                                    <div class="tool-tip-wrapper">
-                                        <div class="tooltip-content-wrapper">
-                                            <img src="{{ URL::asset('img/polygon.png') }}" alt="">
-                                            <div class="tooltip-item">Active</div>
-                                            <div class="tooltip-item">Hide</div>
-                                            <div class="tooltip-item">Recent</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="single-table-row border-bottom py-3 px-3">
-                        <div class="row align-items-center">
-                            <div class="col-md-1 text-center sl-item">
-                                <P>01</P>
-                            </div>
-                            <div class="col-md-2">
-                                <p class="single-table-row-item-name trancate">Audio.mp3</p>
-                            </div>
-                            <div class="col-md-3">
-                                <p class="single-table-row-item-name trancate">How have you built and managed an</p>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="advisor-image d-flex align-items-center"><img
-                                        src="{{ URL::asset('img/user.png') }}" alt="image">
-                                    <div class="advisor-name ml-2">
-                                        <p>Sarah Drinkwater</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-1">
-                                <div class="status-btn m-auto status-hide">Active</div>
-                            </div>
-                            <div class="col-md-2 text-center">
-                                <div class="three-dot"><img src="{{ URL::asset('img/dot.png') }}" alt="">
-                                    <div class="tool-tip-wrapper">
-                                        <div class="tooltip-content-wrapper">
-                                            <img src="{{ URL::asset('img/polygon.png') }}" alt="">
-                                            <div class="tooltip-item">Active</div>
-                                            <div class="tooltip-item">Hide</div>
-                                            <div class="tooltip-item">Recent</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="single-table-row border-bottom py-3 px-3">
-                        <div class="row align-items-center">
-                            <div class="col-md-1 text-center sl-item">
-                                <P>01</P>
-                            </div>
-                            <div class="col-md-2">
-                                <p class="single-table-row-item-name trancate">Audio.mp3</p>
-                            </div>
-                            <div class="col-md-3">
-                                <p class="single-table-row-item-name trancate">How have you built and managed an</p>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="advisor-image d-flex align-items-center"><img
-                                        src="{{ URL::asset('img/user.png') }}" alt="image">
-                                    <div class="advisor-name ml-2">
-                                        <p>Sarah Drinkwater</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-1">
-                                <div class="status-btn m-auto status-hide">Active</div>
-                            </div>
-                            <div class="col-md-2 text-center">
-                                <div class="three-dot"><img src="{{ URL::asset('img/dot.png') }}" alt="">
-                                    <div class="tool-tip-wrapper">
-                                        <div class="tooltip-content-wrapper">
-                                            <img src="{{ URL::asset('img/polygon.png') }}" alt="">
-                                            <div class="tooltip-item">Active</div>
-                                            <div class="tooltip-item">Hide</div>
-                                            <div class="tooltip-item">Recent</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="single-table-row border-bottom py-3 px-3">
-                        <div class="row align-items-center">
-                            <div class="col-md-1 text-center sl-item">
-                                <P>01</P>
-                            </div>
-                            <div class="col-md-2">
-                                <p class="single-table-row-item-name trancate">Audio.mp3</p>
-                            </div>
-                            <div class="col-md-3">
-                                <p class="single-table-row-item-name trancate">How have you built and managed an</p>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="advisor-image d-flex align-items-center"><img
-                                        src="{{ URL::asset('img/user.png') }}" alt="image">
-                                    <div class="advisor-name ml-2">
-                                        <p>Sarah Drinkwater</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-1">
-                                <div class="status-btn m-auto status-hide">Active</div>
-                            </div>
-                            <div class="col-md-2 text-center">
-                                <div class="three-dot"><img src="{{ URL::asset('img/dot.png') }}" alt="">
-                                    <div class="tool-tip-wrapper">
-                                        <div class="tooltip-content-wrapper">
-                                            <img src="{{ URL::asset('img/polygon.png') }}" alt="">
-                                            <div class="tooltip-item">Active</div>
-                                            <div class="tooltip-item">Hide</div>
-                                            <div class="tooltip-item">Recent</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="single-table-row border-bottom py-3 px-3">
-                        <div class="row align-items-center">
-                            <div class="col-md-1 text-center sl-item">
-                                <P>01</P>
-                            </div>
-                            <div class="col-md-2">
-                                <p class="single-table-row-item-name trancate">Audio.mp3</p>
-                            </div>
-                            <div class="col-md-3">
-                                <p class="single-table-row-item-name trancate">How have you built and managed an</p>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="advisor-image d-flex align-items-center"><img
-                                        src="{{ URL::asset('img/user.png') }}" alt="image">
-                                    <div class="advisor-name ml-2">
-                                        <p>Sarah Drinkwater</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-1">
-                                <div class="status-btn m-auto status-hide">Active</div>
-                            </div>
-                            <div class="col-md-2 text-center">
-                                <div class="three-dot"><img src="{{ URL::asset('img/dot.png') }}" alt="">
-                                    <div class="tool-tip-wrapper">
-                                        <div class="tooltip-content-wrapper">
-                                            <img src="{{ URL::asset('img/polygon.png') }}" alt="">
-                                            <div class="tooltip-item">Active</div>
-                                            <div class="tooltip-item">Hide</div>
-                                            <div class="tooltip-item">Recent</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                        @endforeach
+                    @endif
+
+
                 </div>
             </div>
             <div class="pagination-wrapper d-flex justify-content-end align-items-center my-4">
                 <ul class="">
                     <li class="pagination-item"><a href="#"><img src="{{ URL::asset('img/leftArrow.png') }}" alt="image"
-                                class="pagination-arrow pagination-arrow-disabled"></a></li>
+                                                                 class="pagination-arrow pagination-arrow-disabled"></a>
+                    </li>
                     <li class="pagination-item"><a class="" href="#">1</a></li>
                     <li class="pagination-item"><a class="" href="#">2</a></li>
                     <li class="pagination-item"><a class="" href="#">3</a></li>

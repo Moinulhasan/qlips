@@ -4,11 +4,14 @@ namespace App\Providers;
 
 use App\Models\Advisor;
 use App\Models\CustomStatus;
+use App\Models\Qlips;
 use App\Models\Question;
 use App\Models\Topic;
 use App\Models\User;
 use App\Repository\advisor\AdvisorRepository;
 use App\Repository\advisor\AdvisorRepositoryInterface;
+use App\Repository\clips\ClipsRepository;
+use App\Repository\clips\ClipsRepositoryInterface;
 use App\Repository\question\QuestionRepository;
 use App\Repository\question\QuestionRepositoryInterface;
 use App\Repository\status\StatusRepository;
@@ -56,6 +59,15 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->singleton(AdvisorRepositoryInterface::class,function ($app){
             return new AdvisorRepository(new Advisor(),
             resolve(StatusRepositoryInterface::class));
+        });
+
+        //clips register
+        $this->app->singleton(ClipsRepositoryInterface::class,function ($app){
+            return new ClipsRepository(new Qlips(),
+            resolve(QuestionRepositoryInterface::class),
+            resolve(AdvisorRepositoryInterface::class),
+            resolve(StatusRepositoryInterface::class)
+            );
         });
     }
 
