@@ -1,7 +1,7 @@
 @extends("layout.dashboardLayout")
 @section('site-section')
     <div class="page-title">
-        <h2>All Questions</h2>
+        <h2>All Advisor </h2>
         @if (\Session::has('success'))
             <div class="card mb-3" id="success">
                 <div class="card-body">
@@ -107,10 +107,10 @@
                                 <div class="side-card-title">Add new topic</div>
                                 <button class="card-add-btn" type="submit">Add</button>
                             </div>
-                            <input type="text" class="form-control py-3 my-4" placeholder="Enter topic name"
+                            <input type="text" class="form-control py-3 my-4" placeholder="Enter Advisor name"
                                    name="name">
                             @if($errors->has('name'))
-                                <div class="error" id="error"><p>{{ $errors->first('name') }}</p></div>
+                                <div class="error text-danger" id="error"><p>{{ $errors->first('name') }}</p></div>
                             @endif
                         </div>
                         <div class="topic-input-wrapper">
@@ -118,7 +118,7 @@
                             <input type="text" class="form-control py-3 mb-4" placeholder="Enter Profession"
                                    name="profession">
                             @if($errors->has('profession'))
-                                <div class="error" id="error"><p>{{ $errors->first('profession') }}</p></div>
+                                <div class="error text-danger" id="error"><p>{{ $errors->first('profession') }}</p></div>
                             @endif
                         </div>
                     </div>
@@ -133,7 +133,7 @@
                             <input type="file" name="image" id="browsInput" hidden accept="image/*"/>
                         </div>
                         @if($errors->has('image'))
-                            <div class="error" id="error"><p>{{ $errors->first('image') }}</p></div>
+                            <div class="error text-danger" id="error"><p>{{ $errors->first('image') }}</p></div>
                         @endif
                     </div>
                     <div id="preview mt-3">

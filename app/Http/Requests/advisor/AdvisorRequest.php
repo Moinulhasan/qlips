@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\question;
+namespace App\Http\Requests\advisor;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class QuestionRequest extends FormRequest
+class AdvisorRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,8 @@ class QuestionRequest extends FormRequest
     {
         return [
             'name'=>'required|string',
-            'topic.*'=>'nullable|string'
+            'profession'=>'required|string',
+            'image'=>'required|mimes:jpg,jpeg,png,svg,gif|max:5000',
         ];
     }
 }

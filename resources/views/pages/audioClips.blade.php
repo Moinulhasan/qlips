@@ -11,7 +11,7 @@
     @endif
     <div class="page-title-wrapper d-flex justify-content-between">
         <div class="page-title">
-            <h2>All Questions</h2>
+            <h2>All Audio Clips</h2>
 
         </div>
         <div class="add-button-wrapper">
