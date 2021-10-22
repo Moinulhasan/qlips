@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\advisor\AdvisorController;
 use App\Http\Controllers\customAuth\CustomAuthController;
+use App\Http\Controllers\question\QuestionController;
 use App\Http\Controllers\status\StatusController;
 use App\Http\Controllers\topic\TopicController;
 use Illuminate\Database\Console\Migrations\StatusCommand;
@@ -28,9 +30,16 @@ Route::get('/get-all-status',[StatusController::class,'getAllStatus']);
 //register api
 Route::post('/super-admin-register',[CustomAuthController::class,'superAdminRegister']);
 /// topic
-Route::prefix('topic')->group(function ($app){
+Route::prefix('topic')->group(function (){
     Route::post('/create',[TopicController::class,'create']);
     Route::get('/get-all',[TopicController::class,'getAll']);
 });
 
+//question
+Route::prefix('question')->group(function (){
+    Route::get('/get-all',[QuestionController::class,'getAllQuestion']);
+});
+Route::prefix('advisor')->group(function (){
+    Route::get('/featured',[AdvisorController::class,'getAllFeatured']);
+});
 Route::post('/authenticate',[CustomAuthController::class,'Authorization']);

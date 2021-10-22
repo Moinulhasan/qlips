@@ -43,8 +43,8 @@ class ClipsController extends Controller
 
     public function uploadAudio()
     {
-        $question = $this->question->getAll();
-        $advisor = $this->advisor->getAll();
+        $question = $this->question->getAllStatus();
+        $advisor = $this->advisor->getAllStatus();
         return view("pages.uploadAudio",[
             'questions'=>$question,
             'advisors'=>$advisor

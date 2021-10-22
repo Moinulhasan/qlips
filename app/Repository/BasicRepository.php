@@ -29,7 +29,7 @@ class BasicRepository implements BasicRepositoryInterface
     {
         // TODO: Implement getAll() method.
         $data = $this->model->with('status')->whereHas('status',function ($app){
-            $app->where('name','=','active');
+            $app->where('name','!=','Hide');
         })->orderBy($orderByColumn, $order);
         if ($paginate){
             $data = $data->paginate($numberOfResults);

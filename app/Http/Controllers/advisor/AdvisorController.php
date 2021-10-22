@@ -4,6 +4,7 @@ namespace App\Http\Controllers\advisor;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\advisor\AdvisorRequest;
+use App\Http\Resources\advisor\AdvisorResource;
 use App\Repository\advisor\AdvisorRepositoryInterface;
 use Illuminate\Http\Request;
 
@@ -55,6 +56,17 @@ class AdvisorController extends Controller
 
         } catch (\Exception $exception) {
             return redirect()->back()->withErrors(['error' => 'something went wrong']);
+        }
+    }
+
+    public function getAllFeatured()
+    {
+        try {
+            $output = $this->advisor->featuredAdvisor('Featured');
+            return ['status'=>true,'data'=>AdvisorResource::collection($output)];
+        }catch (\Exception $e)
+        {
+            return ['status' => false, 'message' => 'something went wrong'];
         }
     }
 }

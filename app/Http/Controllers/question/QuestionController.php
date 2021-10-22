@@ -4,6 +4,7 @@ namespace App\Http\Controllers\question;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\question\QuestionRequest;
+use App\Http\Resources\question\QuestionResource;
 use App\Repository\advisor\AdvisorRepositoryInterface;
 use App\Repository\question\QuestionRepositoryInterface;
 use App\Repository\topic\TopicRepositoryInterface;
@@ -39,7 +40,7 @@ class QuestionController extends Controller
 
     public function index()
     {
-        $topics = $this->topic->getAll();
+        $topics = $this->topic->getAllStatus();
         $question = $this->question->getAll(true);
         return view('pages.questions',['topics'=>$topics,'questions'=>$question]);
     }
@@ -74,6 +75,16 @@ class QuestionController extends Controller
 
         } catch (\Exception $exception) {
             return redirect()->back()->withErrors(['error' => 'something went wrong']);
+        }
+    }
+
+    public function getAllQuestion()
+    {
+        try {
+            $output = $this->question->getAllStatus();
+            return ['status' => true, 'data' => QuestionResource::collection($output)];
+        } catch (\Exception $exception) {
+            return ['status' => false, 'message' => 'something went wrong'];
         }
     }
 
