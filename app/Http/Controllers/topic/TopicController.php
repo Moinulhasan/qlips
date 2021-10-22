@@ -59,7 +59,7 @@ class TopicController extends Controller
     public function getAll()
     {
         try {
-            $output = $this->topic->getAll();
+            $output = $this->topic->getAllStatus();
             return ['status' => true, 'data' => TopicResource::collection($output)];
         } catch (\Exception $exception) {
             return ['status' => false, 'message' => 'something went wrong'];

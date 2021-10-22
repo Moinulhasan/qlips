@@ -56,4 +56,11 @@ class AdvisorRepository extends \App\Repository\BasicRepository implements Advis
                 return false;
             }
         }
+
+        public function featuredAdvisor($name)
+        {
+            return $this->model->with('status')->whereHas('status',function ($app) use ($name){
+                $app->where('name','=',$name);
+            })->get();
+        }
 }

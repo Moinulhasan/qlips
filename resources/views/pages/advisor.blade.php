@@ -80,6 +80,13 @@
                                                         </form>
                                                     </div>
 
+                                                    <div class="tooltip-item">
+                                                        <form action="{{asset(route('advisor.status.update',['id'=>$item->id,'status'=>'Featured']))}}" method="post">
+                                                            @csrf
+                                                            @method('post')
+                                                            <input type="submit" value="Featured" class="w-100">
+                                                        </form>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
