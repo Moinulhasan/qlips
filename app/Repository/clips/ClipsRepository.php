@@ -4,11 +4,14 @@
 namespace App\Repository\clips;
 
 
+use App\Models\UserListening;
+use App\Models\UserQlips;
 use App\Repository\advisor\AdvisorRepositoryInterface;
 use App\Repository\question\QuestionRepositoryInterface;
 use App\Repository\status\StatusRepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use function Symfony\Component\Translation\t;
 
 class ClipsRepository extends \App\Repository\BasicRepository implements ClipsRepositoryInterface
 {
@@ -69,9 +72,10 @@ class ClipsRepository extends \App\Repository\BasicRepository implements ClipsRe
 
     public function getAllCustom()
     {
-        return $this->model->with('question','advisor','status')->orderBy('created_at','desc')->paginate(10);
+        return $this->model->with('question', 'advisor', 'status')->orderBy('created_at', 'desc')->paginate(10);
     }
-    public function updateStatus($data,$id)
+
+    public function updateStatus($data, $id)
     {
         try {
             $clips = $this->model->find($id);
@@ -79,10 +83,67 @@ class ClipsRepository extends \App\Repository\BasicRepository implements ClipsRe
             $clips->status()->associate($status);
             $clips->save();
             return true;
-        }catch (\Exception $exception)
-        {
+        } catch (\Exception $exception) {
             return false;
         }
+    }
+
+    public function getAllActive($name)
+    {
+        return $this->model->with('question', 'advisor', 'status')
+            ->whereHas('status', function ($app) use ($name) {
+                $app->where('name', '=', $name);
+            })->orderBy('created_at', 'desc')->paginate(20);
+    }
+
+    public function getRelationClips($id, $relation)
+    {
+        return $this->model->with('status', $relation)
+            ->whereHas('status', function ($app) {
+                $app->where('name', '=', 'Active');
+            })->whereHas($relation, function ($app) use ($id) {
+                $app->where('id', $id);
+            })->first();
+    }
+
+    public function updateUpvote($user,$id)
+    {
+        $clips = $this->model->find($id);
+        // first check if already have
+        $check = UserQlips::where('user_id',$user)
+                        ->where('qlips_id',$id)
+                        ->first();
+        if ($check)
+        {
+            $clips->user()->detach();
+            $clips->upvote = ($clips->upvote - 1);
+        }else{
+            $clips->user()->sync($user);
+            $clips->upvote = ($clips->upvote + 1);
+        }
+        $clips->save();
+        return $clips;
+
+    }
+
+    public function updateListening($user,$id)
+    {
+        $clips = $this->model->find($id);
+        // first check if already have
+        $check = UserListening::where('user_id',$user)
+            ->where('qlips_id',$id)
+            ->first();
+        if ($check)
+        {
+            $clips->userLisining()->detach();
+            $clips->listing = ($clips->listing - 1);
+        }else{
+            $clips->userLisining()->sync($user);
+            $clips->listing = ($clips->listing + 1);
+        }
+        $clips->save();
+        return $clips;
+
     }
 
 }

@@ -41,4 +41,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function clips()
+    {
+        return $this->belongsToMany(Qlips::class,'user_qlips','user_id','qulips_id');
+    }
+
+    public function listening()
+    {
+        return $this->belongsToMany(Qlips::class,'user_listenings','user_id','qulips_id');
+    }
 }

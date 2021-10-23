@@ -7,6 +7,7 @@ use App\Http\Requests\advisor\AdvisorRequest;
 use App\Http\Resources\advisor\AdvisorResource;
 use App\Repository\advisor\AdvisorRepositoryInterface;
 use Illuminate\Http\Request;
+use PHPUnit\Exception;
 
 class AdvisorController extends Controller
 {
@@ -65,6 +66,17 @@ class AdvisorController extends Controller
             $output = $this->advisor->featuredAdvisor('Featured');
             return ['status'=>true,'data'=>AdvisorResource::collection($output)];
         }catch (\Exception $e)
+        {
+            return ['status' => false, 'message' => 'something went wrong'];
+        }
+    }
+
+    public function getAllAdvisor()
+    {
+        try {
+            $output = $this->advisor->getAllStatus();
+            return ['status'=>true,'data'=>AdvisorResource::collection($output)];
+        }catch (Exception $exception)
         {
             return ['status' => false, 'message' => 'something went wrong'];
         }
