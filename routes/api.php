@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\advisor\AdvisorController;
+use App\Http\Controllers\clips\ClipsController;
 use App\Http\Controllers\customAuth\CustomAuthController;
 use App\Http\Controllers\question\QuestionController;
 use App\Http\Controllers\status\StatusController;
@@ -39,7 +40,23 @@ Route::prefix('topic')->group(function (){
 Route::prefix('question')->group(function (){
     Route::get('/get-all',[QuestionController::class,'getAllQuestion']);
 });
+
+// advisor
 Route::prefix('advisor')->group(function (){
     Route::get('/featured',[AdvisorController::class,'getAllFeatured']);
+    Route::get('/get-all',[AdvisorController::class,'getAllAdvisor']);
 });
+
+// clips
+Route::prefix('clips')->group(function (){
+    Route::get('/get-all',[ClipsController::class,'getAll']);
+    Route::get('/question/{id}',[ClipsController::class,'getQuestionClips']);
+    Route::get('/advisor/{id}',[ClipsController::class,'getAdvisorClips']);
+});
+
+Route::middleware('auth:sanctum')->group(function (){
+    Route::post('/upvote/{id}',[ClipsController::class,'updateUpvote']);
+    Route::post('/listening/{id}',[ClipsController::class,'updateListeningItem']);
+});
+
 Route::post('/authenticate',[CustomAuthController::class,'Authorization']);

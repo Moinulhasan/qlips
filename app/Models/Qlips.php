@@ -24,4 +24,14 @@ class Qlips extends Model
         return $this->belongsTo(CustomStatus::class,'status_id');
     }
 
+    public function user()
+    {
+        return $this->belongsToMany(User::class,'user_qlips','qlips_id','user_id');
+    }
+
+
+    public function userLisining()
+    {
+        return $this->belongsToMany(User::class,'user_listenings','qlips_id','user_id');
+    }
 }

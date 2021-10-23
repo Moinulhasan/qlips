@@ -4,10 +4,14 @@ namespace App\Http\Controllers\clips;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\clips\ClipsRequest;
+use App\Http\Resources\clips\ClipsResource;
 use App\Repository\advisor\AdvisorRepositoryInterface;
 use App\Repository\clips\ClipsRepositoryInterface;
 use App\Repository\question\QuestionRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Auth;
+use mysql_xdevapi\Exception;
 
 class ClipsController extends Controller
 {
@@ -84,5 +88,61 @@ class ClipsController extends Controller
         {
             return redirect()->back()->withErrors(['error' => 'something went wrong']);
         }
+    }
+
+    public function getAll()
+    {
+        try {
+            $output = $this->clips->getAllActive('Active');
+            $final = ClipsResource::collection($output);
+            return ['status'=>true,'data'=>$final->response()->getData(true)];
+        }catch (Exception $exception)
+        {
+            return ['status' => false, 'message' => 'something went wrong'];
+        }
+    }
+
+    public function getQuestionClips($id)
+    {
+        try {
+            $output = $this->clips->getRelationClips($id,'question');
+            return ['status'=>true,'data'=>new ClipsResource($output)];
+        }catch (Exception $exception)
+        {
+            return ['status' => false, 'message' => 'something went wrong'];
+        }
+    }
+
+    public function getAdvisorClips($id)
+    {
+        try {
+            $output = $this->clips->getRelationClips($id,'advisor');
+            return ['status'=>true,'data'=>new ClipsResource($output)];
+        }catch (Exception $exception)
+        {
+            return ['status' => false, 'message' => 'something went wrong'];
+        }
+    }
+
+    public function updateUpvote($id)
+    {
+        try {
+            $user =Auth::guard('sanctum')->user();
+
+            $output = $this->clips->updateUpvote($user->id,$id);
+            return ['status'=>true,'data'=>new ClipsResource($output)];
+        }catch (\Exception $exception)
+        {
+            return ['status' => false, 'message' => 'something went wrong'];
+        }
+    }
+    public function updateListeningItem($id)
+    {
+//        try {
+            $user =Auth::guard('sanctum')->user();
+
+            $output = $this->clips->updateListening($user->id,$id);
+            return ['status'=>true,'data'=>new ClipsResource($output)];
+//        p
     }
 }
