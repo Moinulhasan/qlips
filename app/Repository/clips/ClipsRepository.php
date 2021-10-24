@@ -103,21 +103,29 @@ class ClipsRepository extends \App\Repository\BasicRepository implements ClipsRe
                 $app->where('name', '=', 'Active');
             })->whereHas($relation, function ($app) use ($id) {
                 $app->where('id', $id);
-            })->first();
+            })->get();
     }
 
-    public function updateUpvote($user,$id)
+    public function getCount($id,$relation)
+    {
+        return $this->model->with('status',$relation)->whereHas('status', function ($app) {
+            $app->where('name', '=', 'Active');
+        })->whereHas($relation, function ($app) use ($id) {
+            $app->where('id', $id);
+        })->sum('listing');
+    }
+
+    public function updateUpvote($user, $id)
     {
         $clips = $this->model->find($id);
         // first check if already have
-        $check = UserQlips::where('user_id',$user)
-                        ->where('qlips_id',$id)
-                        ->first();
-        if ($check)
-        {
+        $check = UserQlips::where('user_id', $user)
+            ->where('qlips_id', $id)
+            ->first();
+        if ($check) {
             $clips->user()->detach();
             $clips->upvote = ($clips->upvote - 1);
-        }else{
+        } else {
             $clips->user()->sync($user);
             $clips->upvote = ($clips->upvote + 1);
         }
@@ -126,24 +134,58 @@ class ClipsRepository extends \App\Repository\BasicRepository implements ClipsRe
 
     }
 
-    public function updateListening($user,$id)
+    public function updateListening($user, $id)
     {
         $clips = $this->model->find($id);
         // first check if already have
-        $check = UserListening::where('user_id',$user)
-            ->where('qlips_id',$id)
+        $check = UserListening::where('user_id', $user)
+            ->where('qlips_id', $id)
             ->first();
-        if ($check)
-        {
+        if ($check) {
             $clips->userLisining()->detach();
             $clips->listing = ($clips->listing - 1);
-        }else{
+        } else {
             $clips->userLisining()->sync($user);
             $clips->listing = ($clips->listing + 1);
         }
         $clips->save();
         return $clips;
 
+    }
+
+    public function recentQuestionClips()
+    {
+        $question = $this->question->getRecentQuestion();
+        $id = $question->id;
+        $clips = $this->model->with('question', 'advisor', 'status')
+            ->whereHas('question', function ($app) use ($id) {
+                $app->where('id', $id)->with('status', 'advisor')->whereHas('status', function ($jj) {
+                    $jj->where('name', '=', 'Active');
+                });
+
+            })->whereHas('status', function ($kk) {
+                $kk->where('name', '=', 'Active');
+            })->get();
+        return ['question' => $question, 'clips' => $clips];
+    }
+
+    public function topicClips($id)
+    {
+        $sum = $this->model->with('question', 'question.topic', 'advisor', 'status')
+            ->whereHas('question.topic', function ($app) use ($id) {
+                $app->where('topic_id', $id);
+            })->whereHas('status',function ($app){
+                $app->where('name','=','Active');
+            })
+            ->sum('listing');
+        $clips = $this->model->with('question', 'question.topic', 'advisor', 'status')
+            ->whereHas('question.topic', function ($app) use ($id) {
+                $app->where('topic_id', $id);
+            })->whereHas('status',function ($app){
+                $app->where('name','=','Active');
+            })
+            ->paginate(15);
+        return ['sum'=>$sum,'clips'=>$clips];
     }
 
 }

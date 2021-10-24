@@ -58,5 +58,9 @@ class QuestionRepository extends \App\Repository\BasicRepository implements Ques
         }
     }
 
+    public function getRecentQuestion()
+    {
+        return $this->model->orderBy('created_at','desc')->take(1)->first();
+    }
 
 }
