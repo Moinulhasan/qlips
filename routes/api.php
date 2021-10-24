@@ -52,6 +52,8 @@ Route::prefix('clips')->group(function (){
     Route::get('/get-all',[ClipsController::class,'getAll']);
     Route::get('/question/{id}',[ClipsController::class,'getQuestionClips']);
     Route::get('/advisor/{id}',[ClipsController::class,'getAdvisorClips']);
+    Route::get('/recent',[ClipsController::class,'recentClips']);
+    Route::get('/topic/{id}',[ClipsController::class,'topicClips']);
 });
 
 Route::middleware('auth:sanctum')->group(function (){

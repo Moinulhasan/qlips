@@ -5,6 +5,7 @@ namespace App\Http\Controllers\clips;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\clips\ClipsRequest;
 use App\Http\Resources\clips\ClipsResource;
+use App\Http\Resources\clips\TopicClipsResource;
 use App\Repository\advisor\AdvisorRepositoryInterface;
 use App\Repository\clips\ClipsRepositoryInterface;
 use App\Repository\question\QuestionRepositoryInterface;
@@ -42,32 +43,29 @@ class ClipsController extends Controller
     public function index()
     {
         $data = $this->clips->getAllCustom();
-        return view("pages.audioClips",['data'=>$data]);
+        return view("pages.audioClips", ['data' => $data]);
     }
 
     public function uploadAudio()
     {
         $question = $this->question->getAllStatus();
         $advisor = $this->advisor->getAllStatus();
-        return view("pages.uploadAudio",[
-            'questions'=>$question,
-            'advisors'=>$advisor
+        return view("pages.uploadAudio", [
+            'questions' => $question,
+            'advisors' => $advisor
         ]);
     }
 
     public function store(ClipsRequest $request)
     {
-        try
-        {
+        try {
             $output = $this->clips->store($request->all());
-            if ($output == true)
-            {
+            if ($output == true) {
                 return redirect()->route('audio.index')->with('success', 'Clips add successfully');
-            }else{
+            } else {
                 return redirect()->back()->withErrors(['error' => 'something went wrong']);
             }
-        }catch (\Exception $exception)
-        {
+        } catch (\Exception $exception) {
             return redirect()->back()->withErrors(['error' => 'something went wrong']);
         }
     }
@@ -77,15 +75,14 @@ class ClipsController extends Controller
         $id = $request->id;
         $status = $request->status;
         try {
-            $output = $this->clips->updateStatus($status,$id);
+            $output = $this->clips->updateStatus($status, $id);
             if ($output == true) {
                 return redirect()->back()->with('success', 'Clips status update successfully');
             } else {
                 return redirect()->back()->withErrors(['error' => 'something went wrong']);
             }
 
-        }catch (\Exception $exception)
-        {
+        } catch (\Exception $exception) {
             return redirect()->back()->withErrors(['error' => 'something went wrong']);
         }
     }
@@ -95,9 +92,8 @@ class ClipsController extends Controller
         try {
             $output = $this->clips->getAllActive('Active');
             $final = ClipsResource::collection($output);
-            return ['status'=>true,'data'=>$final->response()->getData(true)];
-        }catch (Exception $exception)
-        {
+            return ['status' => true, 'data' => $final->response()->getData(true)];
+        } catch (Exception $exception) {
             return ['status' => false, 'message' => 'something went wrong'];
         }
     }
@@ -105,10 +101,9 @@ class ClipsController extends Controller
     public function getQuestionClips($id)
     {
         try {
-            $output = $this->clips->getRelationClips($id,'question');
-            return ['status'=>true,'data'=>new ClipsResource($output)];
-        }catch (Exception $exception)
-        {
+            $output = $this->clips->getRelationClips($id, 'question');
+            return ['status' => true, 'data' => ClipsResource::collection($output)];
+        } catch (Exception $exception) {
             return ['status' => false, 'message' => 'something went wrong'];
         }
     }
@@ -116,10 +111,10 @@ class ClipsController extends Controller
     public function getAdvisorClips($id)
     {
         try {
-            $output = $this->clips->getRelationClips($id,'advisor');
-            return ['status'=>true,'data'=>new ClipsResource($output)];
-        }catch (Exception $exception)
-        {
+            $output = $this->clips->getRelationClips($id, 'advisor');
+            $count = $this->clips->getCount($id,'advisor');
+            return ['status' => true, 'total_listening'=>(int)$count,'data' => ClipsResource::collection($output)];
+        } catch (Exception $exception) {
             return ['status' => false, 'message' => 'something went wrong'];
         }
     }
@@ -127,22 +122,41 @@ class ClipsController extends Controller
     public function updateUpvote($id)
     {
         try {
-            $user =Auth::guard('sanctum')->user();
+            $user = Auth::guard('sanctum')->user();
 
-            $output = $this->clips->updateUpvote($user->id,$id);
-            return ['status'=>true,'data'=>new ClipsResource($output)];
-        }catch (\Exception $exception)
-        {
+            $output = $this->clips->updateUpvote($user->id, $id);
+            return ['status' => true, 'data' => new ClipsResource($output)];
+        } catch (\Exception $exception) {
             return ['status' => false, 'message' => 'something went wrong'];
         }
     }
+
     public function updateListeningItem($id)
     {
-//        try {
-            $user =Auth::guard('sanctum')->user();
+        $user = Auth::guard('sanctum')->user();
 
-            $output = $this->clips->updateListening($user->id,$id);
-            return ['status'=>true,'data'=>new ClipsResource($output)];
-//        p
+        $output = $this->clips->updateListening($user->id, $id);
+        return ['status' => true, 'data' => new ClipsResource($output)];
+    }
+
+    public function recentClips()
+    {
+        try {
+            $output = $this->clips->recentQuestionClips();
+            return ['status' => true, 'question' => $output['question'], 'data' => ClipsResource::collection($output['clips'])];
+        } catch (\Exception $exception) {
+            return ['status' => false, 'message' => 'something went wrong'];
+        }
+    }
+
+    public function topicClips($id)
+    {
+        try {
+            $output = $this->clips->topicClips($id);
+            $final = TopicClipsResource::collection($output['clips']);
+            return ['status' => true, 'total_listening' => (int)$output['sum'], 'data' => $final->response()->getData()];
+        } catch (\Exception $exception) {
+            return ['status' => false, 'message' => 'something went wrong'];
+        }
     }
 }
