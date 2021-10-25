@@ -102,7 +102,8 @@ class ClipsController extends Controller
     {
         try {
             $output = $this->clips->getRelationClips($id, 'question');
-            return ['status' => true, 'data' => ClipsResource::collection($output)];
+            $final = ClipsResource::collection($output);
+            return ['status' => true, 'data' => $final->response()->getData()];
         } catch (Exception $exception) {
             return ['status' => false, 'message' => 'something went wrong'];
         }
@@ -113,7 +114,8 @@ class ClipsController extends Controller
         try {
             $output = $this->clips->getRelationClips($id, 'advisor');
             $count = $this->clips->getCount($id,'advisor');
-            return ['status' => true, 'total_listening'=>(int)$count,'data' => ClipsResource::collection($output)];
+            $final  = ClipsResource::collection($output);
+            return ['status' => true, 'total_listening'=>(int)$count,'data' => $final->response()->getData()];
         } catch (Exception $exception) {
             return ['status' => false, 'message' => 'something went wrong'];
         }
