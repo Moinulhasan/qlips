@@ -103,7 +103,8 @@ class ClipsRepository extends \App\Repository\BasicRepository implements ClipsRe
                 $app->where('name', '=', 'Active');
             })->whereHas($relation, function ($app) use ($id) {
                 $app->where('id', $id);
-            })->get();
+            })->orderBy('created_at','desc')
+            ->paginate(20);
     }
 
     public function getCount($id,$relation)
@@ -183,7 +184,7 @@ class ClipsRepository extends \App\Repository\BasicRepository implements ClipsRe
                 $app->where('topic_id', $id);
             })->whereHas('status',function ($app){
                 $app->where('name','=','Active');
-            })
+            })->orderBy('created_at','desc')
             ->paginate(15);
         return ['sum'=>$sum,'clips'=>$clips];
     }
