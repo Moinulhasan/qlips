@@ -166,7 +166,7 @@ class ClipsRepository extends \App\Repository\BasicRepository implements ClipsRe
 
             })->whereHas('status', function ($kk) {
                 $kk->where('name', '=', 'Active');
-            })->get();
+            })->paginate(20);
         return ['question' => $question, 'clips' => $clips];
     }
 
