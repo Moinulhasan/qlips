@@ -145,7 +145,8 @@ class ClipsController extends Controller
     {
         try {
             $output = $this->clips->recentQuestionClips();
-            return ['status' => true, 'question' => $output['question'], 'data' => ClipsResource::collection($output['clips'])];
+            $final = ClipsResource::collection($output['clips']);
+            return ['status' => true, 'question' => $output['question'], 'data' => $final->response()->getData()];
         } catch (\Exception $exception) {
             return ['status' => false, 'message' => 'something went wrong'];
         }
