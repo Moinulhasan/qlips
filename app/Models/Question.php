@@ -11,11 +11,16 @@ class Question extends Model
 
     public function topic()
     {
-        return $this->belongsToMany(Topic::class,'question_topics');
+        return $this->belongsToMany(Topic::class,'question_topics','question_id','topic_id');
     }
 
     public function status()
     {
         return $this->belongsTo(CustomStatus::class,'status_id');
+    }
+
+    public function clips()
+    {
+        return $this->hasMany(Qlips::class);
     }
 }
