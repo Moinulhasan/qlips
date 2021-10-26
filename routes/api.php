@@ -39,7 +39,11 @@ Route::prefix('topic')->group(function (){
 //question
 Route::prefix('question')->group(function (){
     Route::get('/get-all',[QuestionController::class,'getAllQuestion']);
+    Route::get('/clips',[QuestionController::class,'questionClips']);
+    Route::get('/recent-clips',[QuestionController::class,'recentQuestionClips']);
+    Route::get('/topic-clips/{id}',[QuestionController::class,'topicQuestionClips']);
 });
+///
 
 // advisor
 Route::prefix('advisor')->group(function (){

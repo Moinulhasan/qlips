@@ -44,7 +44,7 @@ class QuestionRepository extends \App\Repository\BasicRepository implements Ques
         }
     }
 
-    public function updateStatus($data,$id)
+    public function updateStatus($data, $id)
     {
         try {
             $advisor = $this->model->find($id);
@@ -52,15 +52,67 @@ class QuestionRepository extends \App\Repository\BasicRepository implements Ques
             $advisor->status()->associate($status);
             $advisor->save();
             return true;
-        }catch (\Exception $exception)
-        {
+        } catch (\Exception $exception) {
             return false;
         }
     }
 
     public function getRecentQuestion()
     {
-        return $this->model->orderBy('created_at','desc')->take(1)->first();
+        return $this->model->orderBy('created_at', 'desc')->take(1)->first();
+    }
+
+    public function allClips()
+    {
+        return $this->model->with('clips.advisor', 'clips', 'status','topic')
+            ->whereHas('status', function ($app) {
+                $app->where('name', '!=', 'Hide');
+            })->whereHas('clips', function ($app) {
+                $app->with('status')->whereHas('status', function ($app) {
+                    $app->where('name', '!=', 'Hide');
+                });
+            })->whereHas('topic', function ($app) {
+                $app->with('status')->whereHas('status', function ($app) {
+                    $app->where('name', '!=', 'Hide');
+                });
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(20);
+    }
+
+    public function recentClipsQuestion()
+    {
+        return $this->model->with('clips', 'clips.advisor', 'status', 'topic')
+            ->whereHas('status', function ($app) {
+                $app->where('name', '!=', 'Hide');
+            })->whereHas('clips', function ($app) {
+                $app->with('status')->whereHas('status', function ($app) {
+                    $app->where('name', '!=', 'Hide');
+                });
+            })->whereHas('topic', function ($app) {
+                $app->with('status')->whereHas('status', function ($app) {
+                    $app->where('name', '!=', 'Hide');
+                });
+            })
+            ->orderBy('created_at', 'desc')
+            ->limit(1)
+            ->get();
+    }
+
+    public function topicClipsQuestion($id)
+    {
+        return $this->model->with('topic', 'clips', 'clips.advisor', 'status')
+            ->whereHas('topic', function ($app) use ($id) {
+                $app->with('status')->whereHas('status', function ($app) {
+                    $app->where('name', '!=', 'Hide');
+                })->where('topic_id', $id);
+            })->whereHas('status', function ($app) {
+                $app->where('name', '!=', 'Hide');
+            })->whereHas('clips', function ($app) {
+                $app->with('status')->whereHas('status', function ($app) {
+                    $app->where('name', '!=', 'Hide');
+                });
+            })->orderBy('created_at', 'desc')->paginate(20);
     }
 
 }
