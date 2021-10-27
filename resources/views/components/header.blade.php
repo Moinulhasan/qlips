@@ -12,9 +12,14 @@
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav ml-auto">
                     <div class="login-user-name-icon" id="userAvatar">
-                        Mahin Khan <img src="{{ URL::asset('img/photo.png') }}" alt="avatar" class="img-fluid">
+                        {{auth()->user()->name}} <img src="{{ URL::asset('img/photo.png') }}" alt="avatar" class="img-fluid">
                         <div class="logout-button-wrapper" id="logOutButton">
-                            <a href="">Logout</a>
+                            <form action="{{asset(route('logout'))}}" method="post">
+                                @csrf
+                                @method('post')
+                                <button type="submit" class="btn">Logout</button>
+                            </form>
+
                         </div>
                     </div>
                 </div>

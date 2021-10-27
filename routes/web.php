@@ -46,6 +46,6 @@ Route::group(['middleware'=>['auth','superAdmin']],function (){
         Route::post('/update-status',[ClipsController::class,'audioUpdate'])->name('audio.status.update');
     });
 
-
+    Route::post('/logout',[AuthenticationWebController::class,'logout'])->name('logout');
 });
 

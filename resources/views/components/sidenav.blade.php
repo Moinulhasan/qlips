@@ -3,17 +3,17 @@
         <div class="toppart">
             <ul>
                 {{-- <li><a href=""> <img src="{{ URL::asset("img/dashboard.svg") }}" alt=""> Dashboard</a></li> --}}
-                <li class="{{ Request::routeIs('topics') ? 'menu-active' : '' }}"><a href="{{ route('topics') }}">
+                <li class="{{ request()->routeIs('topic') ? 'menu-active' : '' }}"><a href="{{ route('topics') }}">
                         <img src="{{ URL::asset('img/message.svg') }}" alt="">
                         Topics</a></li>
-                <li class="{{ Request::routeIs('questions') ? 'menu-active' : '' }}"><a
+                <li class="{{ request()->routeIs('questions') ? 'menu-active' : '' }}"><a
                         href="{{ route('questions') }}">
                         <img src="{{ URL::asset('img/qestions.svg') }}" alt="">
                         Questions</a></li>
-                <li class="{{ Request::routeIs('advisor') ? 'menu-active' : '' }}"><a href="{{ route('advisor') }}">
+                <li class="{{ request()->routeIs('advisor') ? 'menu-active' : '' }}"><a href="{{ route('advisor') }}">
                         <img src="{{ URL::asset('img/people.svg') }}" alt="">
                         Advisors</a></li>
-                <li class="{{ Request::routeIs('audio.index') ? 'menu-active' : '' }}"><a
+                <li class="{{ request()->routeIs('audio.*') ? 'menu-active' : '' }}"><a
                         href="{{ route('audio.index') }}"> <img src="{{ URL::asset('img/qlips.svg') }}" alt="">
                         Audio
                         Qlips</a></li>

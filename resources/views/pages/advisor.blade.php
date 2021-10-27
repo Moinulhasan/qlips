@@ -133,11 +133,20 @@
                         <div class="side-card-body-title">
                             <p class="">Upload Profile Image</p>
                         </div>
+{{--                        <div class="drag-area" id="dragWrapper">--}}
+{{--                            <img src="{{ URL::asset('img/image.png') }}" alt="image" class="img-fluid drug-drop-icon">--}}
+{{--                            <p>Drag and Drop Here (100 X 100px) <br/>or</p>--}}
+{{--                            <button class="custom-file-upload-btn" id="browsButton">Browse Files</button>--}}
+{{--                            <input type="file" name="image" id="browsInput" hidden accept="image/*"/>--}}
+{{--                        </div>--}}
+
+{{--                        <div class="side-card-body-title">--}}
+{{--                            <p class="">Upload Icon</p>--}}
+{{--                        </div>--}}
                         <div class="drag-area" id="dragWrapper">
                             <img src="{{ URL::asset('img/image.png') }}" alt="image" class="img-fluid drug-drop-icon">
-                            <p>Drag and Drop Here (100 X 100px) <br/>or</p>
                             <button class="custom-file-upload-btn" id="browsButton">Browse Files</button>
-                            <input type="file" name="image" id="browsInput" hidden accept="image/*"/>
+                            <input type="file" name="image" id="browsInput" hidden accept="image/*" />
                         </div>
                         @if($errors->has('image'))
                             <div class="error text-danger" id="error"><p>{{ $errors->first('image') }}</p></div>

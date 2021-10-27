@@ -137,7 +137,7 @@ class ClipsController extends Controller
     {
         $user = Auth::guard('sanctum')->user();
 
-        $output = $this->clips->updateListening($user->id, $id);
+        $output = $this->clips->updateListening($user, $id);
         return ['status' => true, 'data' => new ClipsResource($output)];
     }
 
