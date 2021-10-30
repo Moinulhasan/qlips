@@ -205,6 +205,9 @@ main {
         color: #000;
         font-weight: 600;
         margin-bottom: 3rem;
+        @include media("<=tablet") {
+            font-size: 16px;
+        }
     }
 }
 .page-content-table {
@@ -219,6 +222,9 @@ main {
         margin: 0px;
         @include media("<=991px") {
             font-size: 12px;
+        }
+        @include media("<=375px") {
+            font-size: 10px;
         }
     }
 }
@@ -279,6 +285,9 @@ img.table-content-icon {
     font-weight: 500;
     @include media("<=991px") {
         font-size: 12px;
+    }
+    @include media("<=375px") {
+        font-size: 10px;
     }
 }
 
@@ -533,17 +542,6 @@ img.table-content-icon {
     transform: rotate(90deg);
     @include media("<=991px") {
         display: block;
-    }
-}
-
-.topics-tooltip {
-    .tool-tip-wrapper {
-        left: -65px !important;
-    }
-}
-.question-tooltip {
-    .tool-tip-wrapper {
-        left: -65px !important;
     }
 }
 

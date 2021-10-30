@@ -1,3 +1,4 @@
+@import "responsive";
 $box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.1);
 .trancate {
     width: 245px;
@@ -51,6 +52,9 @@ $box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.1);
         width: 120px;
         z-index: 99;
         left: -65px;
+        @include media("<=400px") {
+            left: -75px;
+        }
         background: #ffffff;
         border-radius: 8px;
         padding: 10px;

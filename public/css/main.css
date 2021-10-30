@@ -49,6 +49,11 @@
   padding: 10px;
   box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.1);
 }
+@media (max-width: 400px) {
+  .three-dot .tool-tip-wrapper {
+    left: -75px;
+  }
+}
 .three-dot .tool-tip-wrapper img {
   position: absolute;
   top: -7px;
@@ -267,6 +272,11 @@ main {
   font-weight: 600;
   margin-bottom: 3rem;
 }
+@media (max-width: 768px) {
+  .page-title h2 {
+    font-size: 16px;
+  }
+}
 
 .page-content-table {
   background: #ffffff;
@@ -282,6 +292,11 @@ main {
 @media (max-width: 991px) {
   .table-header p {
     font-size: 12px;
+  }
+}
+@media (max-width: 375px) {
+  .table-header p {
+    font-size: 10px;
   }
 }
 
@@ -380,6 +395,11 @@ img.table-content-icon {
 @media (max-width: 991px) {
   .status-btn {
     font-size: 12px;
+  }
+}
+@media (max-width: 375px) {
+  .status-btn {
+    font-size: 10px;
   }
 }
 
@@ -635,14 +655,6 @@ img.table-content-icon {
   .offcanvas-button {
     display: block;
   }
-}
-
-.topics-tooltip .tool-tip-wrapper {
-  left: -65px !important;
-}
-
-.question-tooltip .tool-tip-wrapper {
-  left: -65px !important;
 }
 
 .audio-clips {
