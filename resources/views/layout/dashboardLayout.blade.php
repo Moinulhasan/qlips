@@ -16,11 +16,11 @@
     @include("components.header")
     <main>
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-2 col-lg-2">
+            <div class="row" class="main-content-row">
+                <div class="col-md-2 col-lg-2 d-none d-lg-block">
                     @include("components.sidenav")
                 </div>
-                <div class="col-md-10 col-lg-10 page-content pl-5 pt-4">
+                <div class="col-md-12 col-lg-10 page-content pl-lg-5 pt-4 pl-md-0">
                     @yield('site-section')
                 </div>
             </div>
@@ -48,6 +48,11 @@
         $("#userAvatar").on("click", function() {
             $("#logOutButton").toggle("fast");
         });
+        // offcanvas
+        // offcanvasContent
+        $("#handleNavbarCollapse").on("click", function() {
+            $("#offcanvasContent").toggle("slow")
+        })
     </script>
     @stack("script")
 </body>
