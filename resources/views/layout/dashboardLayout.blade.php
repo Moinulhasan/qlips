@@ -20,7 +20,7 @@
                 <div class="col-md-2 col-lg-2 d-none d-lg-block">
                     @include("components.sidenav")
                 </div>
-                <div class="col-md-12 col-lg-10 page-content pl-lg-5 pt-4 pl-md-0">
+                <div class="col-md-12 col-lg-10 page-content pl-lg-5 pt-5 pl-md-0 ">
                     @yield('site-section')
                 </div>
             </div>
