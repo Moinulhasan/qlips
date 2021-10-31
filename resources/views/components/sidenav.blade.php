@@ -1,16 +1,17 @@
 <aside>
-    <div class="sidenav-wrapper">
+    <div class="sidenav-wrapper d-lg-block d-md-none d-sm-none d-none d-xl-block">
         <div class="toppart">
             <ul>
                 {{-- <li><a href=""> <img src="{{ URL::asset("img/dashboard.svg") }}" alt=""> Dashboard</a></li> --}}
-                <li class="{{ request()->routeIs('topic') ? 'menu-active' : '' }}"><a href="{{ route('topics') }}">
+                <li class="{{ request()->routeIs('topics') ? 'menu-active' : '' }}"><a href="{{ route('topics') }}">
                         <img src="{{ URL::asset('img/message.svg') }}" alt="">
                         Topics</a></li>
                 <li class="{{ request()->routeIs('questions') ? 'menu-active' : '' }}"><a
                         href="{{ route('questions') }}">
                         <img src="{{ URL::asset('img/qestions.svg') }}" alt="">
                         Questions</a></li>
-                <li class="{{ request()->routeIs('advisor') ? 'menu-active' : '' }}"><a href="{{ route('advisor') }}">
+                <li class="{{ request()->routeIs('advisor') ? 'menu-active' : '' }}"><a
+                        href="{{ route('advisor') }}">
                         <img src="{{ URL::asset('img/people.svg') }}" alt="">
                         Advisors</a></li>
                 <li class="{{ request()->routeIs('audio.*') ? 'menu-active' : '' }}"><a

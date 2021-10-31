@@ -23,21 +23,21 @@
     @endif
 
     <div class="row pb-5">
-        <div class="col-md-8 col-lg-8">
+        <div class="col-md-12 col-lg-8">
             <div class="page-content">
                 <div class="page-content-table">
                     <div class="table-header border-bottom py-3 px-3">
                         <div class="row align-items-center">
-                            <div class="col-md-2">
+                            <div class="col-sm-2 col-2 col-md-2 col-lg-2 col-md-2">
                                 <p>Icon</p>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-sm-5 col-5 col-md-5 col-lg-5 col-md-5">
                                 <p>Topic</p>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-sm-3 col-3 col-md-3 col-lg-3 col-md-3">
                                 <p>Status</p>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-sm-2 col-2 col-md-2 col-lg-2 col-md-2">
                                 <p>Action</p>
                             </div>
                         </div>
@@ -46,18 +46,20 @@
                         @foreach ($data as $item)
                             <div class="single-table-row border-bottom py-3 px-3">
                                 <div class="row align-items-center">
-                                    <div class="col-md-2"><img src="{{ asset('/storage/' . $item->thumbnail) }}"
-                                            alt="" class="table-content-icon "></div>
-                                    <div class="col-md-5">
-                                        <p class="single-table-row-item-name">{{ $item->name }}</p>
+                                    <div class="col-sm-2 col-2 col-md-2 col-lg-2"><img
+                                            src="{{ asset('/storage/' . $item->thumbnail) }}" alt=""
+                                            class="table-content-icon "></div>
+                                    <div class="col-sm-5 col-5 col-md-5 col-lg-5 col-md-5">
+                                        <p class="single-table-row-item-name topics-name">{{ $item->name }}</p>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-sm-3 col-3 col-md-3 col-lg-3 col-md-3">
                                         <div
                                             class="status-btn m-auto {{ $item->status->name == 'Active' ? 'status-btn' : 'status-hide' }}">
                                             {{ $item->status->name }}</div>
                                     </div>
-                                    <div class="col-md-2 text-center">
-                                        <div class="three-dot"><img src="{{ URL::asset('img/dot.png') }}" alt="">
+                                    <div class="col-sm-2 col-2 col-md-2 col-lg-2 col-md-2 text-center">
+                                        <div class="three-dot position-relative topics-tooltip"><img
+                                                src="{{ URL::asset('img/dot.png') }}" alt="">
                                             <div class="tool-tip-wrapper">
                                                 <div class="tooltip-content-wrapper">
                                                     <img src="{{ URL::asset('img/polygon.png') }}" alt="">
@@ -94,7 +96,7 @@
                 {{ $data->links() }}
             </div>
         </div>
-        <div class="col-md-4 col-lg-4">
+        <div class="col-md-12 col-lg-4">
             <div class="sidecard-content-wrapper">
                 <form action="{{ asset(route('topics.create')) }}" method="post" enctype="multipart/form-data">
                     @csrf
