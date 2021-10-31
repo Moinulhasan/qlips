@@ -7,6 +7,7 @@ use App\Http\Requests\question\QuestionRequest;
 use App\Http\Resources\question\QuestionClipsResource;
 use App\Http\Resources\question\QuestionResource;
 use App\Repository\advisor\AdvisorRepositoryInterface;
+use App\Repository\clips\ClipsRepositoryInterface;
 use App\Repository\question\QuestionRepositoryInterface;
 use App\Repository\topic\TopicRepositoryInterface;
 use Illuminate\Http\Request;
@@ -27,15 +28,21 @@ class QuestionController extends Controller
      * @var AdvisorRepositoryInterface
      */
     private $avdisor;
+    /**
+     * @var ClipsRepositoryInterface
+     */
+    private $clip;
 
     public function __construct(
         QuestionRepositoryInterface $questionRepository,
         TopicRepositoryInterface $topicRepository,
-        AdvisorRepositoryInterface $advisorRepository
+        AdvisorRepositoryInterface $advisorRepository,
+        ClipsRepositoryInterface $clipsRepository
     )
     {
         $this->question = $questionRepository;
         $this->topic = $topicRepository;
+        $this->clip = $clipsRepository;
 
     }
 
@@ -115,7 +122,8 @@ class QuestionController extends Controller
         try {
             $output = $this->question->topicClipsQuestion($id);
             $final = QuestionClipsResource::collection($output);
-            return ['status' => true, 'data' => $final->response()->getData()];
+            $summ = $this->clip->topicClips($id);
+            return ['status' => true,'total'=>(int)$summ, 'data' => $final->response()->getData()];
         }catch (\Exception $exception)
         {
             return ['status' => false, 'message' => 'something went wrong'];
