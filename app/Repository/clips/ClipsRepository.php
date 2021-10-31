@@ -179,14 +179,14 @@ class ClipsRepository extends \App\Repository\BasicRepository implements ClipsRe
                 $app->where('name','=','Active');
             })
             ->sum('listing');
-        $clips = $this->model->with('question', 'question.topic', 'advisor', 'status')
-            ->whereHas('question.topic', function ($app) use ($id) {
-                $app->where('topic_id', $id);
-            })->whereHas('status',function ($app){
-                $app->where('name','=','Active');
-            })->orderBy('created_at','desc')
-            ->paginate(15);
-        return ['sum'=>$sum,'clips'=>$clips];
+//        $clips = $this->model->with('question', 'question.topic', 'advisor', 'status')
+//            ->whereHas('question.topic', function ($app) use ($id) {
+//                $app->where('topic_id', $id);
+//            })->whereHas('status',function ($app){
+//                $app->where('name','=','Active');
+//            })->orderBy('created_at','desc')
+//            ->paginate(15);
+        return $sum;
     }
 
 }

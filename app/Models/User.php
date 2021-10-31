@@ -51,4 +51,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Qlips::class,'user_listenings','user_id','qulips_id');
     }
+
+    public function upvote()
+    {
+        return $this->belongsToMany(Qlips::class,'user_upvote','user_id','qlips_id');
+    }
 }

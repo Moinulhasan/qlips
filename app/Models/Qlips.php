@@ -34,4 +34,9 @@ class Qlips extends Model
     {
         return $this->belongsToMany(User::class,'user_listenings','qlips_id','user_id');
     }
+
+    public function userUpvote()
+    {
+        return $this->belongsToMany(User::class,'user_upvote','qlips_id','user_id');
+    }
 }
