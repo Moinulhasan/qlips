@@ -120,6 +120,7 @@ class QuestionController extends Controller
     public function topicQuestionClips($id)
     {
         try {
+
             $output = $this->question->topicClipsQuestion($id);
             $final = QuestionClipsResource::collection($output);
             $summ = $this->clip->topicClips($id);
@@ -128,6 +129,11 @@ class QuestionController extends Controller
         {
             return ['status' => false, 'message' => 'something went wrong'];
         }
+    }
+
+    public function testTopic()
+    {
+        return $this->question->testCustom();
     }
 
 }

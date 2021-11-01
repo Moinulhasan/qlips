@@ -189,4 +189,25 @@ class ClipsRepository extends \App\Repository\BasicRepository implements ClipsRe
         return $sum;
     }
 
+    public function checkUserUpvoteOrListening($relation,$user_id,$clip)
+    {
+        $data = $this->model;
+        if ($relation == 'user')
+        {
+            $data = $data->with('user');
+            $data = $data->whereHas('user',function ($app) use($user_id,$clip){
+                $app->where('user_id',$user_id)->where('qlips_id',$clip);
+            });
+
+        }
+        else{
+            $data = $data->with('userLisining')->whereHas('userLisining',function ($app) use($user_id,$clip){
+                $app->where('user_id',$user_id)->where('qlips_id',$clip);
+            });
+        }
+
+        $data = $data->first();
+        return $data;
+    }
+
 }
