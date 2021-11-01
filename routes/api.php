@@ -36,13 +36,7 @@ Route::prefix('topic')->group(function (){
     Route::get('/get-all',[TopicController::class,'getAll']);
 });
 
-//question
-Route::prefix('question')->group(function (){
-    Route::get('/get-all',[QuestionController::class,'getAllQuestion']);
-    Route::get('/clips',[QuestionController::class,'questionClips']);
-    Route::get('/recent-clips',[QuestionController::class,'recentQuestionClips']);
-    Route::get('/topic-clips/{id}',[QuestionController::class,'topicQuestionClips']);
-});
+
 ///
 
 // advisor
@@ -63,6 +57,15 @@ Route::prefix('clips')->group(function (){
 Route::middleware('auth:sanctum')->group(function (){
     Route::post('/upvote/{id}',[ClipsController::class,'updateUpvote']);
     Route::post('/listening/{id}',[ClipsController::class,'updateListeningItem']);
+
+    //question
+    Route::prefix('question')->group(function (){
+        Route::get('/get-all',[QuestionController::class,'getAllQuestion']);
+        Route::get('/clips',[QuestionController::class,'questionClips']);
+        Route::get('/recent-clips',[QuestionController::class,'recentQuestionClips']);
+        Route::get('/topic-clips/{id}',[QuestionController::class,'topicQuestionClips']);
+    });
 });
 
 Route::post('/authenticate',[CustomAuthController::class,'Authorization']);
+Route::get('/test',[QuestionController::class,'testTopic']);
