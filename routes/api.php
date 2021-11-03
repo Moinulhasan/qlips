@@ -64,7 +64,9 @@ Route::middleware('auth:sanctum')->group(function (){
         Route::get('/clips',[QuestionController::class,'questionClips']);
         Route::get('/recent-clips',[QuestionController::class,'recentQuestionClips']);
         Route::get('/topic-clips/{id}',[QuestionController::class,'topicQuestionClips']);
+
     });
+
 });
 
 Route::post('/authenticate',[CustomAuthController::class,'Authorization']);

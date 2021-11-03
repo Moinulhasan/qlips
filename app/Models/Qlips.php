@@ -32,7 +32,7 @@ class Qlips extends Model
 
     public function userLisining()
     {
-        return $this->belongsToMany(User::class,'user_listenings','qlips_id','userLisining');
+        return $this->belongsToMany(User::class,'user_listenings','qlips_id','user_id');
     }
 
     public function userUpvote()
