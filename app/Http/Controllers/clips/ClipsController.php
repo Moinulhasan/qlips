@@ -162,4 +162,6 @@ class ClipsController extends Controller
             return ['status' => false, 'message' => 'something went wrong'];
         }
     }
+
+
 }

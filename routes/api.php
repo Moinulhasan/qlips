@@ -71,3 +71,4 @@ Route::middleware('auth:sanctum')->group(function (){
 
 Route::post('/authenticate',[CustomAuthController::class,'Authorization']);
 Route::get('/test',[QuestionController::class,'testTopic']);
+Route::get('notification',[ClipsController::class,'testNotification']);
