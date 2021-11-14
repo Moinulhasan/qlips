@@ -62,6 +62,8 @@ class ClipsRepository extends \App\Repository\BasicRepository implements ClipsRe
             $status = $this->status->getSingleWith('Active');
             $clip->status()->associate($status);
             $clip->save();
+            $forPush = $advisor->name.','.$advisor->profession;
+            $this->testNotification($forPush);
             DB::commit();
             return true;
         } catch (\Exception $exception) {
@@ -79,9 +81,22 @@ class ClipsRepository extends \App\Repository\BasicRepository implements ClipsRe
     {
         try {
             $clips = $this->model->find($id);
+            $checkStatus = $this->status->getSingle($clips->status_id);
             $status = $this->status->getSingleWith($data);
             $clips->status()->associate($status);
             $clips->save();
+            if ($data == 'Active')
+            {
+                // check already active or not
+
+                if ($checkStatus->name != 'Active')
+                {
+                    $advisor = $this->advisor->getSingle($clips->advisor_id);
+                    $forPush = $advisor->name.','.$advisor->profession;
+                    $this->testNotification($forPush);
+                }
+
+            }
             return true;
         } catch (\Exception $exception) {
             return false;
@@ -209,5 +224,34 @@ class ClipsRepository extends \App\Repository\BasicRepository implements ClipsRe
         $data = $data->first();
         return $data;
     }
+    public function testNotification($advisor)
+    {
 
+        $url = "https://fcm.googleapis.com/fcm/send";
+        $token = "/topics/global";
+        $serverKey = 'AAAA_NgPeG8:APA91bE4-PTg3VzbTxfRhx_0VAA_XnAHi_ufx9czP5ZAcENHMk_FOvx728v8kPp11ddFLwosMEVbF6EQVgFYrloltVbSLzl02TxoruXcYUmFe7pGuHISl9OZL2jL_Th3kx097Q4eRDxn';
+        $title = "New Qlip added";
+        $body = $advisor." shares his insights.";
+        $notification = array('title' =>$title ,'body'=>$body,'sound' => 'default', 'badge' => '1');
+        $arrayToSend = array('to' => $token, 'notification' => $notification,'priority'=>'high');
+        $json = json_encode($arrayToSend);
+        $headers = array();
+        $headers[] = 'Content-Type: application/json';
+        $headers[] = 'Authorization: key='. $serverKey;
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST,"POST");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
+        curl_setopt($ch, CURLOPT_HTTPHEADER,$headers);
+        // Execute post
+        $result = curl_exec($ch);
+        if ($result === FALSE) {
+            die('Curl failed: ' . curl_error($ch));
+        }
+
+        // Close connection
+        curl_close($ch);
+
+//        return $result;
+    }
 }
