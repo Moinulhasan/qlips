@@ -62,7 +62,7 @@ class ClipsRepository extends \App\Repository\BasicRepository implements ClipsRe
             $status = $this->status->getSingleWith('Active');
             $clip->status()->associate($status);
             $clip->save();
-            $forPush = $advisor->name.','.$advisor->profession;
+            $forPush = $advisor->name.', '.$advisor->profession;
             $this->testNotification($forPush);
             DB::commit();
             return true;
@@ -92,7 +92,7 @@ class ClipsRepository extends \App\Repository\BasicRepository implements ClipsRe
                 if ($checkStatus->name != 'Active')
                 {
                     $advisor = $this->advisor->getSingle($clips->advisor_id);
-                    $forPush = $advisor->name.','.$advisor->profession;
+                    $forPush = $advisor->name.', '.$advisor->profession;
                     $this->testNotification($forPush);
                 }
 
