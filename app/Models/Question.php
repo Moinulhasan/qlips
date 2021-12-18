@@ -23,4 +23,6 @@ class Question extends Model
     {
         return $this->hasMany(Qlips::class);
     }
+
+
 }

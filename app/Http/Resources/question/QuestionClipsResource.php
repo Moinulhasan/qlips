@@ -50,6 +50,7 @@ class Clips extends JsonResource
             'upvote' => $this->upvote,
             'listening' => $this->listing,
             'is_upvote'=>$this->check('user',$user->id,$this->id)?1:0,
+            'status'=>$this->status->name,
             'advisor' => [
                 'advisor_id' => $this->advisor->id,
                 'advisor_name' => $this->advisor->name,

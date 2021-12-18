@@ -4,6 +4,7 @@
 namespace App\Repository\question;
 
 
+use App\Models\CustomStatus;
 use App\Repository\status\StatusRepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -64,55 +65,44 @@ class QuestionRepository extends \App\Repository\BasicRepository implements Ques
 
     public function allClips()
     {
-        return $this->model->with('clips.advisor', 'clips', 'status','topic')
-            ->whereHas('status', function ($app) {
-                $app->where('name', '!=', 'Hide');
-            })->whereHas('clips', function ($app) {
-                $app->with('status')->whereHas('status', function ($app) {
-                    $app->where('name', '!=', 'Hide');
-                });
-            })->whereHas('topic', function ($app) {
-                $app->with('status')->whereHas('status', function ($app) {
-                    $app->where('name', '!=', 'Hide');
-                });
-            })
+        $hiden = CustomStatus::where('name', 'Hide')->first();
+        return $this->model->with(['clips' => function ($app) use ($hiden) {
+            $app->where('status_id', '!=', $hiden->id);
+        }, 'clips.advisor' => function ($op) use ($hiden) {
+            $op->where('status_id', '!=', $hiden->id);
+        }, 'topic' => function ($jj) use ($hiden) {
+            $jj->where('status_id', '!=', $hiden->id);
+        }])->where('status_id', '!=', $hiden->id)
             ->orderBy('created_at', 'desc')
             ->paginate(20);
     }
 
     public function recentClipsQuestion()
     {
-        return $this->model->with('clips', 'clips.advisor', 'status', 'topic')
-            ->whereHas('status', function ($app) {
-                $app->where('name', '!=', 'Hide');
-            })->whereHas('clips', function ($app) {
-                $app->with('status')->whereHas('status', function ($app) {
-                    $app->where('name', '!=', 'Hide');
-                });
-            })->whereHas('topic', function ($app) {
-                $app->with('status')->whereHas('status', function ($app) {
-                    $app->where('name', '!=', 'Hide');
-                });
-            })
+        $hiden = CustomStatus::where('name', 'Hide')->first();
+        return $this->model->with(['clips' => function ($app) use ($hiden) {
+            $app->where('status_id', '!=', $hiden->id);
+        }, 'clips.advisor' => function ($op) use ($hiden) {
+            $op->where('status_id', '!=', $hiden->id);
+        }, 'topic' => function ($jj) use ($hiden) {
+            $jj->where('status_id', '!=', $hiden->id);
+        }])->where('status_id', '!=', $hiden->id)
             ->orderBy('created_at', 'desc')
-            ->limit(1)
+            ->take(1)
             ->get();
     }
 
     public function topicClipsQuestion($id)
     {
-        return $this->model->with('topic', 'clips', 'clips.advisor', 'status')
+        $hiden = CustomStatus::where('name', 'Hide')->first();
+        return $this->model->with(['topic', 'clips' => function ($ok) use ($hiden) {
+            $ok->where('status_id', '!=', $hiden->id);
+        }, 'clips.advisor'])
             ->whereHas('topic', function ($app) use ($id) {
-                $app->with('status')->whereHas('status', function ($app) {
-                    $app->where('name', '!=', 'Hide');
+                $app->with('status')->whereHas('status', function ($kk) {
+                    $kk->where('name', '!=', 'Hide');
                 })->where('topic_id', $id);
-            })->whereHas('status', function ($app) {
-                $app->where('name', '!=', 'Hide');
-            })->whereHas('clips', function ($app) {
-                $app->with('status')->whereHas('status', function ($app) {
-                    $app->where('name', '!=', 'Hide');
-                });
-            })->orderBy('created_at', 'desc')->paginate(20);
+            })->where('status_id','!=',$hiden->id)->orderBy('created_at', 'desc')->paginate(20);
     }
 
 }

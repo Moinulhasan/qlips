@@ -39,4 +39,9 @@ class Qlips extends Model
     {
         return $this->belongsToMany(User::class,'user_upvote','qlips_id','user_id');
     }
+
+    public function custom_clips()
+    {
+        return $this->where('status_id','!=',2);
+    }
 }

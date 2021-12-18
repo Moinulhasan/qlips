@@ -13,4 +13,9 @@ class Advisor extends Model
     {
         return $this->belongsTo(CustomStatus::class,'status_id');
     }
+
+    public function custom_advisor()
+    {
+        return $this->status()->where('slug','!=','hide')->get();
+    }
 }
